@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  api.gate:
+    image: ${DOCKER_REGISTRY-}apigate
+    build:
+      context: .
+      dockerfile: Core.Domain/Dockerfile
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: 360fit
+      POSTGRES_PASSWORD: 360fit-demo
+      POSTGRES_DB: 360fit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
