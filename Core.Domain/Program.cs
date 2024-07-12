@@ -21,6 +21,7 @@ builder.Services.AddDbContext<Context>(
                                  opt => opt.MigrationsAssembly("API.Gate")));
 
 builder.Services.AddGraphQLServer()
+                .RegisterDbContext<Context>()
                 .AddQueryType<Query>();
 #endregion
 

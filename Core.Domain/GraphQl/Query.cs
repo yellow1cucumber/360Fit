@@ -1,17 +1,12 @@
 ﻿using DAL;
 using Domain.Core.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Gate.GraphQl
 {
     public class Query
     {
-        private readonly Context context;
-        public Query(Context context) 
-            => this.context = context ?? throw new ArgumentNullException(nameof(context));
-
-        public List<User> ReadUsers()
-        {
-            return this.context.Users.ToList();
-        }
+        public IQueryable<User> ReadUsers(Context context)
+            => context.Users.AsQueryable();
     }
 }
