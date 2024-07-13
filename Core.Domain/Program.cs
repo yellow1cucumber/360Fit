@@ -22,7 +22,10 @@ builder.Services.AddDbContext<Context>(
 
 builder.Services.AddGraphQLServer()
                 .RegisterDbContext<Context>()
-                .AddQueryType<Query>();
+                .AddQueryType<UsersQuery>()
+                .AddProjections()
+                .AddFiltering()
+                .AddSorting();
 #endregion
 
 
@@ -36,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseWebSockets();
 app.UseAuthorization();
 app.MapControllers();
 app.MapGraphQL();
