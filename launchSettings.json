@@ -3,18 +3,18 @@
     "Docker Compose - swagger": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "launchUrl": "swagger/",
       "serviceActions": {
         "api.gate": "StartDebugging"
-      },
-      "launchUrl": "swagger"
+      }
     },
     "Docker Compose - graphQL": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "launchUrl": "graphql/",
       "serviceActions": {
         "api.gate": "StartDebugging"
-      },
-      "launchUrl": "graphql"
+      }
     }
 
   }

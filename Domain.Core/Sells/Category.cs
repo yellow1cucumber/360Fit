@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Service
+﻿namespace Domain.Core.Sells
 {
     public class Category : Model
     {        
