@@ -1,7 +1,6 @@
-﻿using Domain.Core.Sells;
-using Domain.Core.Users;
+﻿using Domain.Core.Users;
 
-namespace Domain.Core.Service
+namespace Domain.Core.Sells.Service
 {
     public class Service : SalableObject
     {

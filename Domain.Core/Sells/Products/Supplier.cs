@@ -1,6 +1,6 @@
 ﻿using Domain.Core.Organization;
 
-namespace Domain.Core.Products
+namespace Domain.Core.Sells.Products
 {
     public class Supplier : Model
     {

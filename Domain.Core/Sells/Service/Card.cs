@@ -1,6 +1,6 @@
 ﻿using Domain.Core.Users;
 
-namespace Domain.Core.Service
+namespace Domain.Core.Sells.Service
 {
     public class Card : Model
     {
