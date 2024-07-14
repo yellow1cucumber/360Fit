@@ -1,5 +1,6 @@
 ﻿using DAL;
 using Domain.Core.Sells.Products;
+using API.Gate.GraphQl.Exceptions;
 
 namespace API.Gate.GraphQl.Mutations
 {
@@ -17,29 +18,48 @@ namespace API.Gate.GraphQl.Mutations
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Product> CreateOrUpdateProduct([Service] Context context, Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
-            if (context.Products.Any(x => x.Id == product.Id))
-            {
-                context.Products.Update(product);
-                await context.SaveChangesAsync();
-                return product;
-            }
-            await context.Products.AddAsync(product);
-            await context.SaveChangesAsync();
+            await this.repository.CreateAsync(product);
             return product;
         }
 
+        [UseProjection]
         [UseFiltering]
-        public async Task<Product> RemoveProduct([Service] Context context, Product product)
+        public async Task<Product> UpdateProduct(Product product)
         {
-            if (context.Products.Contains(product))
+            try
             {
-                context.Products.Remove(product);
-                await context.SaveChangesAsync();
+                await this.repository.UpdateAsync(product);
                 return product;
             }
-            return product;
+            catch (IndexOutOfRangeException ex)
+            {
+                throw new NotFound($"Product with id == {product.Id} not found", product.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        [UseFiltering]
+        public async Task<Product> RemoveProduct(Product product)
+        {
+            try
+            {
+                await this.repository.DeleteAsync(product.Id);
+                return product;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                throw new NotFound($"Product with id == {product.Id} not found", product.Id);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
