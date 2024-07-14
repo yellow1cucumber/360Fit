@@ -1,7 +1,6 @@
 ﻿using API.Gate.GraphQl.Exceptions;
 using DAL;
 using Domain.Core.Sells.Service;
-using Domain.Core.Users;
 
 namespace API.Gate.GraphQl.Mutations
 {
