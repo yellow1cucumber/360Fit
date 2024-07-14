@@ -3,6 +3,7 @@ using Domain.Core.Users;
 
 namespace API.Gate.GraphQl
 {
+    [ExtendObjectType("Query")]
     public class UsersQuery
     {
         [UseProjection]

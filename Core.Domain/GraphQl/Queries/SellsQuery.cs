@@ -4,6 +4,7 @@ using Domain.Core.Sells.PaymentRules;
 
 namespace API.Gate.GraphQl
 {
+    [ExtendObjectType("Query")]
     public class SellsQuery
     {
         [UseProjection]

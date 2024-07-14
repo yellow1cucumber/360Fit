@@ -3,6 +3,7 @@ using Domain.Core.Sells.Products;
 
 namespace API.Gate.GraphQl
 {
+    [ExtendObjectType("Query")]
     public class ProductsQuery
     {
         [UseProjection]

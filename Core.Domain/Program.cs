@@ -1,4 +1,6 @@
 using API.Gate.GraphQl;
+using API.Gate.GraphQl.Exceptions;
+using API.Gate.GraphQl.Mutations;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,10 +24,20 @@ builder.Services.AddDbContext<Context>(
 
 builder.Services.AddGraphQLServer()
                 .RegisterDbContext<Context>()
-                .AddQueryType<UsersQuery>()
                 .AddProjections()
                 .AddFiltering()
-                .AddSorting();
+                .AddSorting()
+                .AddErrorFilter<ErrorFilter>()
+
+                .AddQueryType(q => q.Name("Query"))
+                    .AddType<UsersQuery>()
+                    .AddType<SellsQuery>()
+                    .AddType<ServicesQuery>()
+                    .AddType<ProductsQuery>()
+
+                .AddMutationType(m => m.Name("Mutations"))
+                    .AddType<UsersMutation>()
+                    .AddType<ProductsMutations>();
 #endregion
 
 
@@ -44,18 +56,5 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGraphQL();
 #endregion
-
-/*#region Migrations
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<Context>();
-    if (context.Database.GetPendingMigrations().Any())
-    {
-        context.Database.Migrate();
-    }
-}
-#endregion*/
 
 app.Run();

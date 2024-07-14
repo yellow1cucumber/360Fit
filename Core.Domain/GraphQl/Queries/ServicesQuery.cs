@@ -3,6 +3,7 @@ using Domain.Core.Sells.Service;
 
 namespace API.Gate.GraphQl
 {
+    [ExtendObjectType("Query")]
     public class ServicesQuery
     {
         [UseProjection]
