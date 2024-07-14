@@ -7,39 +7,59 @@ namespace API.Gate.GraphQl.Mutations
     [ExtendObjectType("Mutations")]
     public class UsersMutation
     {
+        private readonly Context context;
+        private readonly Repository<User> repository;
+
+        public UsersMutation([Service] Context context)
+        {
+            this.context = context;
+            this.repository = new Repository<User>(context);
+        }
+
         [UseProjection]
         [UseFiltering]
-        public async Task<User> CreateUser([Service]Context context, User user)
+        public async Task<User> CreateUser(User user)
         {
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
+            await this.repository.CreateAsync(user);
             return user;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<User> UpdateUser([Service] Context context, User user)
+        public async Task<User> UpdateUser(User user)
         {
-            if (context.Users.Any(x => x.Id == user.Id))
+            try
             {
-                context.Users.Update(user);
-                await context.SaveChangesAsync();
+                await this.repository.UpdateAsync(user);
                 return user;
             }
-            throw new NotFound($"User with id == {user.Id} not found", user.Id);
+            catch (ArgumentOutOfRangeException ex)
+            {
+                throw new NotFound($"User with id == {user.Id} not found", user.Id);
+            }
+            catch
+            {
+                throw;
+            }            
         }
 
 
         [UseFiltering]
-        public async Task<User> RemoveUser([Service] Context context, User user)
+        public async Task<User> RemoveUser(User user)
         {
-            if (context.Users.Contains(user))
+            try
             {
-                context.Users.Remove(user);
-                await context.SaveChangesAsync();
+                await this.repository.DeleteAsync(user.Id);
                 return user;
             }
-            throw new NotFound($"User with id == {user.Id} not found", user.Id);
+            catch (ArgumentOutOfRangeException ex)
+            {
+                throw new NotFound($"User with id == {user.Id} not found", user.Id);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

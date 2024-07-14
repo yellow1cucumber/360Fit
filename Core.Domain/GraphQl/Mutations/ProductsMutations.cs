@@ -6,7 +6,15 @@ namespace API.Gate.GraphQl.Mutations
     [ExtendObjectType("Mutations")]
     public class ProductsMutations
     {
-        #region Product
+        private readonly Context context;
+        private readonly Repository<Product> repository;
+
+        public ProductsMutations([Service] Context context)
+        {
+            this.context = context;
+            this.repository = new Repository<Product>(context);
+        }
+
         [UseProjection]
         [UseFiltering]
         public async Task<Product> CreateOrUpdateProduct([Service] Context context, Product product)
@@ -33,7 +41,5 @@ namespace API.Gate.GraphQl.Mutations
             }
             return product;
         }
-
-        #endregion
     }
 }
