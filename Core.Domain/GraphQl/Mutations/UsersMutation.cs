@@ -33,7 +33,7 @@ namespace API.Gate.GraphQl.Mutations
                 await this.repository.UpdateAsync(user);
                 return user;
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
                 throw new NotFound($"User with id == {user.Id} not found", user.Id);
             }
@@ -52,7 +52,7 @@ namespace API.Gate.GraphQl.Mutations
                 await this.repository.DeleteAsync(user.Id);
                 return user;
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentOutOfRangeException)
             {
                 throw new NotFound($"User with id == {user.Id} not found", user.Id);
             }
