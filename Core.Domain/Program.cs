@@ -12,15 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options => 
-    options.AddDefaultPolicy(builder =>builder
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(builder => builder
         .AllowAnyHeader()
         .AllowAnyOrigin()
         .AllowAnyMethod())
 );
 
 builder.Services.AddDbContext<Context>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"), 
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
                                  opt => opt.MigrationsAssembly("API.Gate")));
 
 builder.Services.AddGraphQLServer()

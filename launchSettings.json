@@ -3,21 +3,26 @@
     "Docker Compose - swagger": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "api.gate",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "serviceActions": {
-        "api.gate": "StartDebugging"
+        "api.gate": "StartDebugging",
+        "postgres": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging"
       }
     },
     "Docker Compose - graphQL": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/graphql",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "api.gate",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/graphql",
       "serviceActions": {
-        "api.gate": "StartDebugging"
+        "api.gate": "StartDebugging",
+        "postgres": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging"
       }
     }
-
   }
 }
