@@ -3,7 +3,7 @@ using Domain.Core.Sells.PaymentRules;
 
 namespace API.Gate.GraphQl.Subscriptions
 {
-    [ExtendObjectType("Subscription")]
+    [ExtendObjectType("Subscriptions")]
     public class SellsSubscription
     {
         #region PaymentDate

@@ -2,7 +2,7 @@
 
 namespace API.Gate.GraphQl.Subscriptions
 {
-    [ExtendObjectType("Subscription")]
+    [ExtendObjectType("Subscriptions")]
     public class ProductsSubscription
     {
         [Subscribe]

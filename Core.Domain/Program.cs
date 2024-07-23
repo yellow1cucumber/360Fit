@@ -1,6 +1,7 @@
 using API.Gate.GraphQl;
 using API.Gate.GraphQl.Exceptions;
 using API.Gate.GraphQl.Mutations;
+using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +40,13 @@ builder.Services.AddGraphQLServer()
                     .AddType<UsersMutation>()
                     .AddType<ProductsMutations>()
                     .AddType<SellsMutation>()
-                    .AddType<UsersMutation>();
+                    .AddType<UsersMutation>()
+
+                .AddSubscriptionType(s => s.Name("Subscriptions"))
+                    .AddType<ProductsSubscription>()
+                    .AddType<SellsSubscription>()
+                    .AddType<ServiceSubscription>()
+                    .AddType<UsersSubscription>();
 #endregion
 
 
