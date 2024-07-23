@@ -4,6 +4,7 @@ using API.Gate.GraphQl.Mutations;
 using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,7 @@ builder.Services.AddGraphQLServer()
                     .AddType<SellsMutation>()
                     .AddType<UsersMutation>()
 
+                .AddRedisSubscriptions((sp) => ConnectionMultiplexer.Connect("127.0.0.1:6379"))
                 .AddSubscriptionType(s => s.Name("Subscriptions"))
                     .AddType<ProductsSubscription>()
                     .AddType<SellsSubscription>()
