@@ -12,5 +12,9 @@ namespace API.Gate.GraphQl.Subscriptions
         [Subscribe]
         public User OnUserChanged([EventMessage] User user)
             => user;
+
+        [Subscribe]
+        public User OnUserRemoved([EventMessage] User user)
+            => user;
     }
 }

@@ -14,6 +14,10 @@ namespace API.Gate.GraphQl.Subscriptions
         [Subscribe]
         public PaymentDate OnPaymentDateChanged([EventMessage] PaymentDate paymentDate) 
             => paymentDate;
+
+        [Subscribe]
+        public PaymentDate OnPaymentDateRemoved([EventMessage] PaymentDate paymentDate)
+            => paymentDate;
         #endregion
 
 
@@ -25,6 +29,10 @@ namespace API.Gate.GraphQl.Subscriptions
         [Subscribe]
         public PaymentRule OnPaymentRuleChanged([EventMessage] PaymentRule paymentRule)
             => paymentRule;
+
+        [Subscribe]
+        public PaymentRule OnPaymentRuleRemoved([EventMessage] PaymentRule paymentRule)
+            => paymentRule;
         #endregion
 
 
@@ -35,6 +43,10 @@ namespace API.Gate.GraphQl.Subscriptions
 
         [Subscribe]
         public Payment OnPaymentChanged([EventMessage] Payment payment)
+            => payment;
+
+        [Subscribe]
+        public Payment OnPaymentRemoved([EventMessage] Payment payment)
             => payment;
         #endregion
     }
