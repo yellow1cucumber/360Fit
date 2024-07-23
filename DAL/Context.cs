@@ -1,10 +1,11 @@
 ﻿using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
-using Domain.Core.Service;
+using Domain.Core.Sells.Products;
+using Domain.Core.Sells.Service;
 using Domain.Core.Users;
 using Microsoft.EntityFrameworkCore;
 
-using ServiceCategory = Domain.Core.Service.Category;
+using ServiceCategory = Domain.Core.Sells.Category;
 
 namespace DAL
 {
@@ -27,6 +28,15 @@ namespace DAL
         public DbSet<PaymentDate> PaymentDates { get; set; }
         public DbSet<PaymentRule> PaymentRules { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        #endregion
+
+        #region Products
+        public DbSet<Product> Products { get; set; }
+        public DbSet<StoragedProduct> StoragedProducts { get; set; }
+        public DbSet<CashRegister> CashRegisters{ get; set; }
+        public DbSet<Storage> Storages { get; set; }
+        public DbSet<Nomenclature> Nomenclatures { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         #endregion
     }
 }

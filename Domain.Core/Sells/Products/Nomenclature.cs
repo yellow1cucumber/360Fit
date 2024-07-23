@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Products
+﻿namespace Domain.Core.Sells.Products
 {
     public class Nomenclature : Model
     {

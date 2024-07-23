@@ -1,11 +1,14 @@
 ﻿using DAL;
 using Domain.Core.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Gate.GraphQl
 {
-    public class Query
+    [ExtendObjectType("Query")]
+    public class UsersQuery
     {
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<User> ReadUsers(Context context)
             => context.Users.AsQueryable();
     }

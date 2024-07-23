@@ -3,6 +3,7 @@ using System;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Gate.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240713130616_ModelsUpdate")]
+    partial class ModelsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,7 @@ namespace API.Gate.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("RootCategoryId")
+                    b.Property<int>("RootCategoryId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -365,10 +368,11 @@ namespace API.Gate.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly?>("DateOfBirth")
+                    b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -376,10 +380,6 @@ namespace API.Gate.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Patronomic")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -464,7 +464,9 @@ namespace API.Gate.Migrations
                 {
                     b.HasOne("Domain.Core.Sells.Category", "RootCategory")
                         .WithMany("ChildCategories")
-                        .HasForeignKey("RootCategoryId");
+                        .HasForeignKey("RootCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("RootCategory");
                 });
