@@ -37,7 +37,9 @@ builder.Services.AddGraphQLServer()
 
                 .AddMutationType(m => m.Name("Mutations"))
                     .AddType<UsersMutation>()
-                    .AddType<ProductsMutations>();
+                    .AddType<ProductsMutations>()
+                    .AddType<SellsMutation>()
+                    .AddType<UsersMutation>();
 #endregion
 
 
