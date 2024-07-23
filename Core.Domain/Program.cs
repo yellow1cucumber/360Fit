@@ -41,7 +41,7 @@ builder.Services.AddGraphQLServer()
                     .AddType<UsersMutation>()
                     .AddType<ProductsMutations>()
                     .AddType<SellsMutation>()
-                    .AddType<UsersMutation>()
+                    .AddType<ServiceMutations>()
 
                 .AddRedisSubscriptions((sp) => ConnectionMultiplexer.Connect("127.0.0.1:6379"))
                 .AddSubscriptionType(s => s.Name("Subscriptions"))

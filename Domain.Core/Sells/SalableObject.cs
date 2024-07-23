@@ -1,6 +1,6 @@
 ﻿namespace Domain.Core.Sells
 {
-    public abstract class SalableObject : Model
+    public class SalableObject : Model
     {
         public string Name { get; set; }
         public string Description { get; set; }
