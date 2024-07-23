@@ -1,6 +1,8 @@
 ﻿using API.Gate.GraphQl.Exceptions;
+using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Domain.Core.Sells.Service;
+using HotChocolate.Subscriptions;
 
 namespace API.Gate.GraphQl.Mutations
 {
@@ -18,19 +20,23 @@ namespace API.Gate.GraphQl.Mutations
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Service> CreateService(Service service)
+        public async Task<Service> CreateService(Service service, 
+                                                [Service] ITopicEventSender sender)
         {
             await this.repository.CreateAsync(service);
+            await sender.SendAsync(nameof(ServiceSubscription.OnServiceCreated), service);
             return service;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Service> UpdateService(Service service)
+        public async Task<Service> UpdateService(Service service,
+                                                [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.repository.UpdateAsync(service);
+                await sender.SendAsync(nameof(ServiceSubscription.OnServiceChanged), service);
                 return service;
             }
             catch (ArgumentOutOfRangeException)
@@ -45,11 +51,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<Service> RemoveService(Service service)
+        public async Task<Service> RemoveService(Service service,
+                                                [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.repository.DeleteAsync(service.Id);
+                await sender.SendAsync(nameof(ServiceSubscription.OnServiceRemoved), service);
                 return service;
             }
             catch (ArgumentOutOfRangeException)

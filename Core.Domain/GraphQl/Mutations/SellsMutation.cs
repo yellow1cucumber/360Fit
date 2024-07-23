@@ -1,8 +1,10 @@
 ﻿using API.Gate.GraphQl.Exceptions;
+using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Service;
+using HotChocolate.Subscriptions;
 
 namespace API.Gate.GraphQl.Mutations
 {
@@ -25,19 +27,23 @@ namespace API.Gate.GraphQl.Mutations
         #region PaymentDate
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentDate> CreatePaymentDate(PaymentDate paymentDate)
+        public async Task<PaymentDate> CreatePaymentDate(PaymentDate paymentDate,
+                                                        [Service] ITopicEventSender sender)
         {
             await this.paymentDateRepository.CreateAsync(paymentDate);
+            await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateCreated), paymentDate);
             return paymentDate;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentDate> UpdatePaymentDate(PaymentDate paymentDate)
+        public async Task<PaymentDate> UpdatePaymentDate(PaymentDate paymentDate,
+                                                        [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentDateRepository.UpdateAsync(paymentDate);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateChanged), paymentDate);
                 return paymentDate;
             }
             catch (ArgumentOutOfRangeException)
@@ -52,11 +58,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<PaymentDate> RemovePaymentDate(PaymentDate paymentDate)
+        public async Task<PaymentDate> RemovePaymentDate(PaymentDate paymentDate, 
+                                                        [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentDateRepository.DeleteAsync(paymentDate.Id);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateRemoved), paymentDate);
                 return paymentDate;
             }
             catch (ArgumentOutOfRangeException)
@@ -75,19 +83,23 @@ namespace API.Gate.GraphQl.Mutations
         #region PaymentRule
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentRule> CreatePaymentDate(PaymentRule paymentRule)
+        public async Task<PaymentRule> CreatePaymentRule(PaymentRule paymentRule, 
+                                                        [Service] ITopicEventSender sender)
         {
             await this.paymentRuleRepository.CreateAsync(paymentRule);
+            await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleCreated), paymentRule);
             return paymentRule;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentRule> UpdatePaymentDate(PaymentRule paymentRule)
+        public async Task<PaymentRule> UpdatePaymentRule(PaymentRule paymentRule, 
+                                                        [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentRuleRepository.UpdateAsync(paymentRule);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleChanged), paymentRule);
                 return paymentRule;
             }
             catch (ArgumentOutOfRangeException)
@@ -102,11 +114,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<PaymentRule> RemovePaymentDate(PaymentRule paymentRule)
+        public async Task<PaymentRule> RemovePaymentRule(PaymentRule paymentRule, 
+                                                        [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentRuleRepository.DeleteAsync(paymentRule.Id);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleRemoved), paymentRule);
                 return paymentRule;
             }
             catch (ArgumentOutOfRangeException)
@@ -125,19 +139,23 @@ namespace API.Gate.GraphQl.Mutations
         #region Payment
         [UseProjection]
         [UseFiltering]
-        public async Task<Payment> CreatePayment(Payment payment)
+        public async Task<Payment> CreatePayment(Payment payment,
+                                                [Service] ITopicEventSender sender)
         {
             await this.paymentRepository.CreateAsync(payment);
+            await sender.SendAsync(nameof(SellsSubscription.OnPaymentCreated), payment);
             return payment;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Payment> UpdatePayment(Payment payment)
+        public async Task<Payment> UpdatePayment(Payment payment, 
+                                                [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentRepository.UpdateAsync(payment);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentCreated), payment);
                 return payment;
             }
             catch (ArgumentOutOfRangeException)
@@ -152,11 +170,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<Payment> RemovePayment(Payment payment)
+        public async Task<Payment> RemovePayment(Payment payment,
+                                                [Service] ITopicEventSender sender)
         {
             try
             {
                 await this.paymentRepository.DeleteAsync(payment.Id);
+                await sender.SendAsync(nameof(SellsSubscription.OnPaymentRemoved), payment);
                 return payment;
             }
             catch (ArgumentOutOfRangeException)
