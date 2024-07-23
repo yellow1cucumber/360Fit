@@ -1,6 +1,7 @@
 using API.Gate.GraphQl;
 using API.Gate.GraphQl.Exceptions;
 using API.Gate.GraphQl.Mutations;
+using API.Gate.GraphQl.Redis;
 using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<RedisConnection>();
 
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(builder => builder
@@ -43,7 +46,12 @@ builder.Services.AddGraphQLServer()
                     .AddType<SellsMutation>()
                     .AddType<ServiceMutations>()
 
-                .AddRedisSubscriptions((sp) => ConnectionMultiplexer.Connect("127.0.0.1:6379"))
+                .AddRedisSubscriptions( (sp) =>
+                {
+                    var con = new RedisConnection(builder.Configuration);
+                    var opt = con.GetConfigurationOptions();
+                    return ConnectionMultiplexer.Connect(opt);
+                })
                 .AddSubscriptionType(s => s.Name("Subscriptions"))
                     .AddType<ProductsSubscription>()
                     .AddType<SellsSubscription>()
