@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Organization
+﻿namespace Domain.Core.Organization.Contact
 {
     public class Contacts : Model
     {
