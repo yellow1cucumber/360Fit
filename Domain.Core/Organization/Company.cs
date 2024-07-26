@@ -1,4 +1,6 @@
-﻿namespace Domain.Core.Organization
+﻿using Domain.Core.Organization.Contact;
+
+namespace Domain.Core.Organization
 {
     public class Company : Model
     {
@@ -6,5 +8,6 @@
         public string Description {  get; set; }
 
         public Requisites Requisites { get; set; }
+        public Contacts Contacts { get; set; }
     }
 }
