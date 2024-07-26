@@ -1,9 +1,7 @@
 ﻿namespace Domain.Core.Organization
 {
-    public class Company
+    public class Company : Model
     {
-        public int Id { get; set; }
-
         public string PublicName { get; set; }
         public string Description {  get; set; }
 
