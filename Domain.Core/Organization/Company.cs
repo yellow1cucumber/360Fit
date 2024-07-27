@@ -1,4 +1,5 @@
 ﻿using Domain.Core.Organization.Contact;
+using Domain.Core.Users;
 
 namespace Domain.Core.Organization
 {
@@ -11,6 +12,9 @@ namespace Domain.Core.Organization
 
         public Requisites Requisites { get; set; }
         public Contacts Contacts { get; set; }
+
+        public IEnumerable<User> Staff { get; set; }
+        public IEnumerable<User> Clients { get; set; }
 
         public enum CompanyCategory
         {
