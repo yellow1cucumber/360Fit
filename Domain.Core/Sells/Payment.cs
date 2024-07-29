@@ -1,4 +1,5 @@
-﻿using Domain.Core.Sells.PaymentRules;
+﻿using Domain.Core.Organization;
+using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Users;
 
 namespace Domain.Core.Sells
@@ -13,5 +14,7 @@ namespace Domain.Core.Sells
         public IEnumerable<SalableObject> Cart { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public Company Company { get; set; }
     }
 }
