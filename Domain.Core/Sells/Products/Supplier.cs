@@ -7,5 +7,7 @@ namespace Domain.Core.Sells.Products
         public Requisites Requisites { get; set; }
 
         public Nomenclature Nomenclature { get; set; }
+
+        public Company Company { get; set; }
     }
 }

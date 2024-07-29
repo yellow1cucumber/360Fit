@@ -1,4 +1,6 @@
-﻿namespace Domain.Core.Users
+﻿using Domain.Core.Organization;
+
+namespace Domain.Core.Users
 {
     public class User : Model
     {
@@ -8,7 +10,10 @@
         public string PhoneNumber { get; set; }
         public string? Email { get; set; }
         public DateOnly? DateOfBirth { get; set; }
-        public Roles Role { get; set; }      
+        public Roles Role { get; set; }
+
+        public IEnumerable<Company> StaffIn { get; set; }
+        public IEnumerable<Company> ClientIn { get; set; }
         
         public enum Roles
         {

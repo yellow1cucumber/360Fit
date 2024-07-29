@@ -1,4 +1,5 @@
-﻿using Domain.Core.Sells;
+﻿using Domain.Core.Organization;
+using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
@@ -38,5 +39,47 @@ namespace DAL
         public DbSet<Nomenclature> Nomenclatures { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         #endregion
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Company>()
+                .HasMany(c => c.Staff)
+                .WithMany(u => u.StaffIn)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CompanyStaff",
+                    j => j
+                        .HasOne<User>()
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("FK_CompanyStaff_User_UserId")
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j => j
+                        .HasOne<Company>()
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .HasConstraintName("FK_CompanyStaff_Company_CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<Company>()
+                .HasMany(c => c.Clients)
+                .WithMany(u => u.ClientIn)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CompanyClient",
+                    j => j
+                        .HasOne<User>()
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("FK_CompanyClient_User_UserId")
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j => j
+                        .HasOne<Company>()
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .HasConstraintName("FK_CompanyClient_Company_CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade));
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Core.Users;
+﻿using Domain.Core.Organization;
+using Domain.Core.Users;
 
 namespace Domain.Core.Sells.Service
 {
@@ -6,5 +7,7 @@ namespace Domain.Core.Sells.Service
     {
         public Category Category { get; set; }
         public IEnumerable<User> Providers { get; set; }
+
+        public Company Company { get; set; }
     }
 }
