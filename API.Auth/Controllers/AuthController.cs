@@ -1,4 +1,5 @@
-﻿using API.Auth.Services;
+﻿using API.Auth.Exceptions;
+using API.Auth.Services;
 using DAL;
 using Domain.Core.Users;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace API.Auth.Controllers
         private readonly IdentificationService identificationService;
 
         public AuthController(Context context, 
-                             AccessTokenService accessTokenService,
-                             IdentificationService identificationService)
+                              AccessTokenService accessTokenService,
+                              IdentificationService identificationService)
         {
             this.accessTokenService = accessTokenService;
             this.identificationService = identificationService;
@@ -23,7 +24,22 @@ namespace API.Auth.Controllers
         [HttpPost("/auth")]
         public async Task<IResult> AuthUser(string phone, string password)
         {
-            return Results.NotFound();
+            User user;
+            try
+            {
+                user = await this.identificationService.IdentificateUser(phone);
+            }
+            catch (UserNotIdentificatedException ex)
+            {
+                return Results.NotFound(ex);
+            }
+
+            var token = this.accessTokenService.GenerateToken(user);
+            return Results.Ok(
+                new {
+                    token = token,
+                    user = user,
+                });
         }
     }
 }
