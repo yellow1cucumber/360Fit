@@ -10,6 +10,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<AccessTokenService>();
+builder.Services.AddTransient<IdentificationService>();
+
 
 builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
