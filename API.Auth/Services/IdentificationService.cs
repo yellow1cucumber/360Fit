@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using API.Auth.Exceptions;
+using DAL;
 using Domain.Core.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ namespace API.Auth.Services
                                               .FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber);
             if (user is null)
             {
-                throw new Exception("User not identificated");
+                throw new UserNotIdentificatedException(phoneNumber);
             }
 
             return user;
