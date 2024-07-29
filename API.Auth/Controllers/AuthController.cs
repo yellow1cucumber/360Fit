@@ -9,16 +9,15 @@ namespace API.Auth.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly Context context;
-        private readonly Repository<User> userRepository;
         private readonly AccessTokenService accessTokenService;
+        private readonly IdentificationService identificationService;
 
-        public AuthController(Context context, AccessTokenService accessTokenService)
+        public AuthController(Context context, 
+                             AccessTokenService accessTokenService,
+                             IdentificationService identificationService)
         {
-            this.context = context;
-            this.userRepository = new Repository<User>(context);
-
             this.accessTokenService = accessTokenService;
+            this.identificationService = identificationService;
         }
 
         [HttpPost("/auth")]
