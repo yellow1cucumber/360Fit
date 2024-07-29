@@ -2,7 +2,7 @@
 {
     public class UserNotIdentificatedException : Exception
     {
-        public UserNotIdentificatedException(Exception? innerException, string phone)
+        public UserNotIdentificatedException(string phone, Exception? innerException = null)
             : base(UserNotIdentificatedException.CompileMessage(phone),
                   innerException)
             => this.Phone = phone;
