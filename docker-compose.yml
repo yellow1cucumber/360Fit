@@ -7,7 +7,7 @@ services:
     image: ${DOCKER_REGISTRY-}apigate
     build:
       context: .
-      dockerfile: Core.Domain/Dockerfile
+      dockerfile: API.Gate/Dockerfile
 
   postgres:
     container_name: PostgreSQL
