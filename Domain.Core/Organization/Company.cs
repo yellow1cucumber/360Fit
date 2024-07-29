@@ -1,4 +1,7 @@
 ﻿using Domain.Core.Organization.Contact;
+using Domain.Core.Sells;
+using Domain.Core.Sells.Products;
+using Domain.Core.Sells.Service;
 using Domain.Core.Users;
 
 namespace Domain.Core.Organization
@@ -15,6 +18,16 @@ namespace Domain.Core.Organization
 
         public IEnumerable<User> Staff { get; set; }
         public IEnumerable<User> Clients { get; set; }
+
+        public IEnumerable<CashRegister> CashRegisters { get; set; }
+        public IEnumerable<Storage> Storages { get; set; }
+        public IEnumerable<Nomenclature> Nomenclatures { get; set; }
+        public IEnumerable<Supplier> Suppliers { get; set; }
+
+        public IEnumerable<Service> Services { get; set; }
+
+        public IEnumerable<Payment> Payment { get; set; }
+
 
         public enum CompanyCategory
         {
