@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Gate", "API.Gate\API.Gate.csproj", "{5B14E09E-DADB-447E-AA11-752B27D2D3F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Auth", "API.Auth\API.Auth.csproj", "{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Auth", "API.Auth\API.Auth.csproj", "{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.ClienLogging", "Domain.ClienLogging\Domain.ClienLogging.csproj", "{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
