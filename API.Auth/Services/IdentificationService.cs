@@ -16,12 +16,13 @@ namespace API.Auth.Services
             this.repository = new Repository<User>(context);
         }
 
-        public async Task<User> IdentificateUser(string phoneNumber)
+        public async Task<bool> IdentificateUser(UserCredentials credentials)
         {
-            User user = await this.repository.GetAll()
-                                              .FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber)
-                                              ?? throw new UserNotIdentificatedException(phoneNumber);
-            return user;
+            User? user = await this.repository.GetAll()
+                                              .FirstOrDefaultAsync(
+                user => user.Credentials.PhoneNumber == credentials.PhoneNumber);
+
+            return user != null;
         }
     }
 }
