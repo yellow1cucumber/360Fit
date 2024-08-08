@@ -1,4 +1,5 @@
-﻿using Domain.Core.Organization;
+﻿using Domain.ClienLogging;
+using Domain.Core.Organization;
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
@@ -38,6 +39,10 @@ namespace DAL
         public DbSet<Storage> Storages { get; set; }
         public DbSet<Nomenclature> Nomenclatures { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        #endregion
+
+        #region ClientLogging
+        public DbSet<ClientLog> ClientLogs { get; set; }
         #endregion
 
 
