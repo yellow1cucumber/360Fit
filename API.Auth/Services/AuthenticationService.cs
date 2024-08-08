@@ -1,4 +1,5 @@
 ﻿using API.Auth.Exceptions;
+using API.Auth.Requests;
 using DAL;
 using Domain.Core.Users;
 using Microsoft.EntityFrameworkCore;
@@ -16,14 +17,14 @@ namespace API.Auth.Services
             this.repository = new Repository<User>(context);
         }
 
-        public async Task<User> AuthentificateUser(UserCredentials userCredentials)
+        public async Task<User> AuthenticateUser(AuthenticationRequest request)
         {
             User user = await this.repository.GetAll().FirstOrDefaultAsync(
                 user => 
-                    user.Credentials.PhoneNumber == userCredentials.PhoneNumber &&
-                    user.Credentials.Password == userCredentials.Password
+                    user.Credentials.PhoneNumber == request.PhoneNumber &&
+                    user.Credentials.Password == request.Password
                 )
-                ?? throw new UserNotAuthenticatedException(userCredentials.PhoneNumber);
+                ?? throw new UserNotAuthenticatedException(request.PhoneNumber);
             return user;
         }
     }
