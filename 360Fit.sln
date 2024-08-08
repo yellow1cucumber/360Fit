@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Gate", "API.Gate\API.Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Auth", "API.Auth\API.Auth.csproj", "{498854F9-7A5A-4CBB-BFEE-D5EBC2A9B334}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.ClienLogging", "Domain.ClienLogging\Domain.ClienLogging.csproj", "{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.ClientLogging", "Domain.ClienLogging\Domain.ClientLogging.csproj", "{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

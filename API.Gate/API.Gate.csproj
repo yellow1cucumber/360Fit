@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\Domain.ClienLogging\Domain.ClienLogging.csproj" />
+    <ProjectReference Include="..\Domain.ClienLogging\Domain.ClientLogging.csproj" />
   </ItemGroup>
 
   <ItemGroup>
