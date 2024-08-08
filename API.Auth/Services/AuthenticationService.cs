@@ -1,5 +1,7 @@
-﻿using DAL;
+﻿using API.Auth.Exceptions;
+using DAL;
 using Domain.Core.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Auth.Services
 {
@@ -14,9 +16,15 @@ namespace API.Auth.Services
             this.repository = new Repository<User>(context);
         }
 
-        public async Task<bool> AuthentificateUser(User user)
+        public async Task<User> AuthentificateUser(UserCredentials userCredentials)
         {
-            throw new NotImplementedException();
+            User user = await this.repository.GetAll().FirstOrDefaultAsync(
+                user => 
+                    user.Credentials.PhoneNumber == userCredentials.PhoneNumber &&
+                    user.Credentials.Password == userCredentials.Password
+                )
+                ?? throw new UserNotAuthenticatedException(userCredentials.PhoneNumber);
+            return user;
         }
     }
 }
