@@ -41,8 +41,8 @@ namespace API.Auth.Services
             var payload = new Claim[]
             {
                 new Claim("id", user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.PhoneNumber),
-                new Claim(ClaimTypes.Role, user.Role.ToString())
+                new Claim(ClaimTypes.Name, user.Credentials.PhoneNumber),
+                new Claim(ClaimTypes.Role, user.Credentials.Role.ToString())
             };
 
             claims.AddClaims(payload);
