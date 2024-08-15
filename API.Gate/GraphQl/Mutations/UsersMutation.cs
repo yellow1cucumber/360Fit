@@ -21,8 +21,6 @@ namespace API.Gate.GraphQl.Mutations
         }
 
         #region Users
-        [UseProjection]
-        [UseFiltering]
         public async Task<User> CreateUser(User user,
                                           [Service] ITopicEventSender sender)
         {
@@ -75,8 +73,6 @@ namespace API.Gate.GraphQl.Mutations
         #endregion Users
 
         #region UserCredentials
-        [UseProjection]
-        [UseFiltering]
         public async Task<UserCredentials> CreateUserCredentials(UserCredentials userCredentials,
                                   [Service] ITopicEventSender sender)
         {
