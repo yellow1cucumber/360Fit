@@ -10,20 +10,23 @@ namespace API.Gate.GraphQl.Mutations
     public class UsersMutation
     {
         private readonly Context context;
-        private readonly Repository<User> repository;
+        private readonly Repository<User> usersRepository;
+        private readonly Repository<UserCredentials> credentialsRepository;
 
         public UsersMutation([Service] Context context)
         {
             this.context = context;
-            this.repository = new Repository<User>(context);
+            this.usersRepository = new Repository<User>(context);
+            this.credentialsRepository = new Repository<UserCredentials>(context);
         }
 
+        #region Users
         [UseProjection]
         [UseFiltering]
         public async Task<User> CreateUser(User user,
                                           [Service] ITopicEventSender sender)
         {
-            await this.repository.CreateAsync(user);
+            await this.usersRepository.CreateAsync(user);
             await sender.SendAsync(nameof(UsersSubscription.OnUserCreated), user);
             return user;
         }
@@ -35,7 +38,7 @@ namespace API.Gate.GraphQl.Mutations
         {
             try
             {
-                await this.repository.UpdateAsync(user);
+                await this.usersRepository.UpdateAsync(user);
                 await sender.SendAsync(nameof(UsersSubscription.OnUserChanged), user);
                 return user;
             }
@@ -56,7 +59,7 @@ namespace API.Gate.GraphQl.Mutations
         {
             try
             {
-                await this.repository.DeleteAsync(user.Id);
+                await this.usersRepository.DeleteAsync(user.Id);
                 await sender.SendAsync(nameof(UsersSubscription.OnUserRemoved), user);
                 return user;
             }
@@ -69,5 +72,39 @@ namespace API.Gate.GraphQl.Mutations
                 throw;
             }
         }
+        #endregion Users
+
+        #region UserCredentials
+        [UseProjection]
+        [UseFiltering]
+        public async Task<UserCredentials> CreateUserCredentials(UserCredentials userCredentials,
+                                  [Service] ITopicEventSender sender)
+        {
+            await this.credentialsRepository.CreateAsync(userCredentials);
+            await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsCreated), userCredentials);
+            return userCredentials;
+        }
+
+        [UseProjection]
+        [UseFiltering]
+        public async Task<UserCredentials> UpdateUser(UserCredentials userCredentials,
+                                          [Service] ITopicEventSender sender)
+        {
+            try
+            {
+                await this.credentialsRepository.UpdateAsync(userCredentials);
+                await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsChanged), userCredentials);
+                return userCredentials;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NotFound($"UserCredentials with id == {userCredentials.Id} not found", userCredentials.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }
