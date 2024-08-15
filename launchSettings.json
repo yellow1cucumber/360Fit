@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Docker Compose - swagger": {
+    "API.Gate - swagger": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
@@ -12,7 +12,19 @@
         "redis": "StartWithoutDebugging"
       }
     },
-    "Docker Compose - graphQL": {
+    "API.Auth - swagger": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "api.auth",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "serviceActions": {
+        "api.gate": "StartDebugging",
+        "postgres": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging"
+      }
+    },
+    "GraphQL": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
