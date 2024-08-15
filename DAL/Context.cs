@@ -47,8 +47,8 @@ namespace DAL
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Credentials)
-                .WithOne(uc => uc.User)
-                .HasForeignKey<UserCredentials>()
+                .WithOne()
+                .HasForeignKey<UserCredentials>(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Company>()
