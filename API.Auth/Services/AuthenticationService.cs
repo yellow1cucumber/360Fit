@@ -2,7 +2,6 @@
 using API.Auth.Requests;
 using DAL;
 using Domain.Core.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Auth.Services
 {
@@ -17,15 +16,9 @@ namespace API.Auth.Services
             this.repository = new Repository<User>(context);
         }
 
-        public async Task<User> AuthenticateUser(AuthenticationRequest request)
+        public bool AuthenticateUser(AuthenticationRequest request, User user)
         {
-            User user = await this.repository.GetAll().FirstOrDefaultAsync(
-                user => 
-                    user.Credentials.PhoneNumber == request.PhoneNumber &&
-                    user.Credentials.Password == request.Password
-                )
-                ?? throw new UserNotAuthenticatedException(request.PhoneNumber);
-            return user;
+            return request.Password == user.Credentials.Password;
         }
     }
 }
