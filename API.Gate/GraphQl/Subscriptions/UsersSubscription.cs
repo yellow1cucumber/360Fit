@@ -5,6 +5,8 @@ namespace API.Gate.GraphQl.Subscriptions
     [ExtendObjectType("Subscriptions")]
     public class UsersSubscription
     {
+
+        #region Users
         [Subscribe]
         public User OnUserCreated([EventMessage] User user)
             => user;
@@ -16,5 +18,15 @@ namespace API.Gate.GraphQl.Subscriptions
         [Subscribe]
         public User OnUserRemoved([EventMessage] User user)
             => user;
+        #endregion
+
+        #region UserCredentials
+        public UserCredentials OnUserCredentialsCreated([EventMessage] UserCredentials userCredentials)
+            => userCredentials;
+
+        [Subscribe]
+        public UserCredentials OnUserCredentialsChanged([EventMessage] UserCredentials userCredentials)
+            => userCredentials;
+        #endregion
     }
 }
