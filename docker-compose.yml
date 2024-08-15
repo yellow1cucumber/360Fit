@@ -9,6 +9,13 @@ services:
       context: .
       dockerfile: API.Gate/Dockerfile
 
+  api.auth:
+    container_name: Auth
+    image: ${DOCKER_REGISTRY-}auth
+    build:
+        context: .
+        dockerfile: API.Auth/Dockerfile
+
   postgres:
     container_name: PostgreSQL
     image: postgres:latest
