@@ -10,11 +10,10 @@ services:
       dockerfile: API.Gate/Dockerfile
 
   api.auth:
-    container_name: Auth
-    image: ${DOCKER_REGISTRY-}auth
+    image: ${DOCKER_REGISTRY-}apiauth
     build:
-        context: .
-        dockerfile: API.Auth/Dockerfile
+      context: .
+      dockerfile: API.Auth/Dockerfile
 
   postgres:
     container_name: PostgreSQL
