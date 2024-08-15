@@ -20,6 +20,7 @@ namespace API.Auth.Services
         public async Task<User> IdentificateUser(AuthenticationRequest request)
         {
             User user = await this.repository.GetAll()
+                                              .Include(user => user.Credentials)
                                               .FirstOrDefaultAsync(
                 user => user.Credentials.PhoneNumber == request.PhoneNumber)
             ?? throw new UserNotIdentificatedException(request.PhoneNumber);

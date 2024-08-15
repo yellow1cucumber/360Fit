@@ -42,7 +42,7 @@ namespace API.Auth.Controllers
 
             if(!this.authenticationService.HasAccess(request, user))
             {
-                return Results.Forbid();
+                return Results.StatusCode(403);
             }
 
             var token = this.accessTokenService.GenerateToken(user);
