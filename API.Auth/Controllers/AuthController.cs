@@ -1,5 +1,6 @@
 ﻿using API.Auth.Exceptions;
 using API.Auth.Requests;
+using API.Auth.Responses;
 using API.Auth.Services;
 using DAL;
 using Domain.Core.Users;
@@ -36,7 +37,7 @@ namespace API.Auth.Controllers
             }
             catch (UserNotIdentificatedException)
             {
-                return Results.NotFound();
+                return Results.NotFound(new UserNotFoundResponse(request.PhoneNumber));
             }
 
             if(!this.authenticationService.HasAccess(request, user))
