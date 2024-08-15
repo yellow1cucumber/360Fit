@@ -34,14 +34,14 @@ namespace API.Auth.Controllers
             {
                 user = await this.identificationService.IdentificateUser(request);
             }
-            catch (UserNotIdentificatedException ex)
+            catch (UserNotIdentificatedException)
             {
-                return Results.NotFound(ex);
+                return Results.NotFound();
             }
 
-            if (!this.authenticationService.AuthenticateUser(request, user))
+            if(!this.authenticationService.HasAccess(request, user))
             {
-                return Results.Unauthorized();
+                return Results.Forbid();
             }
 
             var token = this.accessTokenService.GenerateToken(user);
