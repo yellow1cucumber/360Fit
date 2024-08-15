@@ -1,5 +1,4 @@
-﻿using API.Auth.Exceptions;
-using API.Auth.Requests;
+﻿using API.Auth.Requests;
 using DAL;
 using Domain.Core.Users;
 
@@ -16,7 +15,7 @@ namespace API.Auth.Services
             this.repository = new Repository<User>(context);
         }
 
-        public bool AuthenticateUser(AuthenticationRequest request, User user)
+        public bool HasAccess(AuthenticationRequest request, User user)
         {
             return request.Password == user.Credentials.Password;
         }

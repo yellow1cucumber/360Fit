@@ -1,5 +1,6 @@
 ﻿using API.Auth.Exceptions;
 using API.Auth.Requests;
+using API.Auth.Responses;
 using API.Auth.Services;
 using DAL;
 using Domain.Core.Users;
@@ -34,14 +35,14 @@ namespace API.Auth.Controllers
             {
                 user = await this.identificationService.IdentificateUser(request);
             }
-            catch (UserNotIdentificatedException ex)
+            catch (UserNotIdentificatedException)
             {
-                return Results.NotFound(ex);
+                return Results.NotFound(new UserNotFoundResponse(request.PhoneNumber));
             }
 
-            if (!this.authenticationService.AuthenticateUser(request, user))
+            if(!this.authenticationService.HasAccess(request, user))
             {
-                return Results.Unauthorized();
+                return Results.StatusCode(403);
             }
 
             var token = this.accessTokenService.GenerateToken(user);
