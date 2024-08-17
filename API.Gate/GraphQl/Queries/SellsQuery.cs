@@ -15,7 +15,6 @@ namespace API.Gate.GraphQl
 
         [UseProjection]
         [UseFiltering]
-        [UseSorting]
         public IQueryable<PaymentRule> ReadPaymentRules(Context context)
             => context.PaymentRules.AsQueryable();
 
