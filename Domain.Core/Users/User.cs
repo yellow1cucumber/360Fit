@@ -7,10 +7,10 @@ namespace Domain.Core.Users
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronomic { get; set; }
-        public string PhoneNumber { get; set; }
         public string? Email { get; set; }
         public DateOnly? DateOfBirth { get; set; }
-        public Roles Role { get; set; }
+
+        public UserCredentials Credentials { get; set; }
 
         public IEnumerable<Company> StaffIn { get; set; }
         public IEnumerable<Company> ClientIn { get; set; }
@@ -18,9 +18,10 @@ namespace Domain.Core.Users
         public enum Roles
         {
             Owner = 0,
-            Admin = 1,
-            Specialist = 2,
-            Client = 3
+            Manager = 1,
+            Admin = 2,
+            Specialist = 3,
+            Client = 4
         }
     }
 }

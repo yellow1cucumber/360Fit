@@ -4,10 +4,13 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["API.Auth/API.Auth.csproj", "API.Auth/"]
+COPY ["DAL/DAL.csproj", "DAL/"]
+COPY ["Domain.Core/Domain.Core.csproj", "Domain.Core/"]
 RUN dotnet restore "./API.Auth/API.Auth.csproj"
 COPY . .
 WORKDIR "/src/API.Auth"

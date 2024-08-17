@@ -50,6 +50,12 @@ namespace DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Credentials)
+                .WithOne()
+                .HasForeignKey<UserCredentials>(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Company>()
                 .HasMany(c => c.Staff)
                 .WithMany(u => u.StaffIn)
@@ -67,6 +73,7 @@ namespace DAL
                         .HasForeignKey("CompanyId")
                         .HasConstraintName("FK_CompanyStaff_Company_CompanyId")
                         .OnDelete(DeleteBehavior.Cascade));
+
 
             modelBuilder.Entity<Company>()
                 .HasMany(c => c.Clients)

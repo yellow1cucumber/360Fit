@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<AccessTokenService>();
 builder.Services.AddTransient<IdentificationService>();
+builder.Services.AddTransient<AuthenticationService>();
 
 
 builder.Services.AddDbContext<Context>(
