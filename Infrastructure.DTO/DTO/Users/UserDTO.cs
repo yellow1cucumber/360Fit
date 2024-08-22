@@ -1,6 +1,4 @@
-﻿using Domain.Core.Organization;
-
-namespace Domain.Core.Users
+﻿namespace Domain.Core.Users
 {
     public class UserDTO
     {
@@ -11,17 +9,6 @@ namespace Domain.Core.Users
         public DateOnly? DateOfBirth { get; set; }
 
         public UserCredentialsDTO Credentials { get; set; }
-
-        public IEnumerable<CompanyDTO> StaffIn { get; set; }
-        public IEnumerable<CompanyDTO> ClientIn { get; set; }
         
-        public enum Roles
-        {
-            Owner = 0,
-            Manager = 1,
-            Admin = 2,
-            Specialist = 3,
-            Client = 4
-        }
     }
 }

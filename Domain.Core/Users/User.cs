@@ -1,6 +1,4 @@
-﻿using Domain.Core.Organization;
-
-namespace Domain.Core.Users
+﻿namespace Domain.Core.Users
 {
     public class User : Model
     {
@@ -12,16 +10,5 @@ namespace Domain.Core.Users
 
         public UserCredentials Credentials { get; set; }
 
-        public IEnumerable<Company> StaffIn { get; set; }
-        public IEnumerable<Company> ClientIn { get; set; }
-        
-        public enum Roles
-        {
-            Owner = 0,
-            Manager = 1,
-            Admin = 2,
-            Specialist = 3,
-            Client = 4
-        }
     }
 }
