@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Auth", "API.Auth\API.Au
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.ClientLogging", "Domain.ClienLogging\Domain.ClientLogging.csproj", "{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.DTO", "Infrastructure.DTO\Infrastructure.DTO.csproj", "{E7E88F46-9A60-462A-BC15-84BBD3D7ED5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12372298-4B6E-48E6-97E1-DFCDF8DE9E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E88F46-9A60-462A-BC15-84BBD3D7ED5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E88F46-9A60-462A-BC15-84BBD3D7ED5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E88F46-9A60-462A-BC15-84BBD3D7ED5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E88F46-9A60-462A-BC15-84BBD3D7ED5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
