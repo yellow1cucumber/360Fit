@@ -1,4 +1,5 @@
 ﻿using Infrastructure.DTO.Organization;
+using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Sells.Service
 {

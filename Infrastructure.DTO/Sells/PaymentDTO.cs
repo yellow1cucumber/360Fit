@@ -1,5 +1,6 @@
 ﻿using Infrastructure.DTO.Organization;
 using Infrastructure.DTO.Sells.PaymentRules;
+using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Sells
 {

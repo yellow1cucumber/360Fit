@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.DTO.Sells.Service
+﻿using Infrastructure.DTO.Users;
+
+namespace Infrastructure.DTO.Sells.Service
 {
     public class CardDTO
     {

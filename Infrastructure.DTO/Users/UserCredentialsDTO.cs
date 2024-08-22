@@ -1,4 +1,4 @@
-﻿using Infrastructure.DTO.Users.Role;
+﻿using Infrastructure.DTO.Users.Roles;
 
 namespace Infrastructure.DTO.Users
 {

@@ -2,6 +2,7 @@
 using Infrastructure.DTO.Sells;
 using Infrastructure.DTO.Sells.Products;
 using Infrastructure.DTO.Sells.Service;
+using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Organization
 {

@@ -1,6 +1,6 @@
 ﻿using Domain.Core.Organization;
 
-namespace Infrastructure.DTO.Users.Role
+namespace Infrastructure.DTO.Users.Roles
 {
     public class RoleDTO
     {

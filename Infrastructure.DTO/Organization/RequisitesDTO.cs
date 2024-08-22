@@ -1,4 +1,4 @@
-﻿using Infrastructure.DTO.Sells;
+﻿using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Organization
 {
