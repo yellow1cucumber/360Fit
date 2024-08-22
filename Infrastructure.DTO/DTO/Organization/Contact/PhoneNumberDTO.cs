@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Organization.Contact
+﻿namespace Infrastructure.DTO.Organization.Contact
 {
     public class PhoneNumberDTO
     {

@@ -1,11 +1,10 @@
-﻿using Domain.Core.Organization;
-using Domain.Core.Sells.PaymentRules;
-using Domain.Core.Users;
+﻿using Infrastructure.DTO.Organization;
+using Infrastructure.DTO.Sells.PaymentRules;
 
-namespace Domain.Core.Sells
+namespace Infrastructure.DTO.Sells
 {
     public class PaymentDTO
-    {       
+    {
         public UserDTO Provider { get; set; }
         public UserDTO Customer { get; set; }
 

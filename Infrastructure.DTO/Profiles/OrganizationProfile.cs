@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Core.Organization;
 using Domain.Core.Organization.Contact;
+using Infrastructure.DTO.Organization;
+using Infrastructure.DTO.Organization.Contact;
 
 namespace Infrastructure.DTO.Profiles
 {

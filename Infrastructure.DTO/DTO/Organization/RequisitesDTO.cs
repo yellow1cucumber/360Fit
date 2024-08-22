@@ -1,6 +1,6 @@
-﻿using Domain.Core.Users;
+﻿using Infrastructure.DTO.Sells;
 
-namespace Domain.Core.Organization
+namespace Infrastructure.DTO.Organization
 {
     public class RequisitesDTO
     {
@@ -9,14 +9,14 @@ namespace Domain.Core.Organization
         public string NameKZ { get; set; }
         public string NameRU { get; set; }
         public string? NameEN { get; set; }
-        
+
         public UserDTO? Director { get; set; }
 
         public string? BIN { get; set; }
         public string? KBE { get; set; }
 
         public string? LegalAddress { get; set; }
-        public string? PhysicalAddress {  get; set; }
+        public string? PhysicalAddress { get; set; }
 
         public IEnumerable<BankRequisitesDTO> BankRequisites { get; set; }
 

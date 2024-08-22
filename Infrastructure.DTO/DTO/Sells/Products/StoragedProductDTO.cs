@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Sells.Products
+﻿namespace Infrastructure.DTO.Sells.Products
 {
     public class StoragedProductDTO
     {

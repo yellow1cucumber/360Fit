@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Sells.PaymentRules
+﻿namespace Infrastructure.DTO.Sells.PaymentRules
 {
     public class PaymentRuleDTO
     {

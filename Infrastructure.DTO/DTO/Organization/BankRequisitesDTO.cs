@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Organization
+﻿namespace Infrastructure.DTO.Organization
 {
     public class BankRequisitesDTO
     {

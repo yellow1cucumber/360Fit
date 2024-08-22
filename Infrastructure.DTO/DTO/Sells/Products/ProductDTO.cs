@@ -1,6 +1,4 @@
-﻿using Domain.Core.Sells;
-
-namespace Domain.Core.Sells.Products
+﻿namespace Infrastructure.DTO.Sells.Products
 {
     public class ProductDTO : SalableObjectDTO
     {
