@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.DTO.Sells
+﻿using Infrastructure.DTO.Users.Role;
+
+namespace Infrastructure.DTO.Sells
 {
     public class UserCredentialsDTO
     {
@@ -6,6 +8,6 @@
         public string Password { get; set; }
 
         public int UserId { get; set; }
-        public UserDTO.Roles Role { get; set; }
+        public RoleDTO Role { get; set; }
     }
 }

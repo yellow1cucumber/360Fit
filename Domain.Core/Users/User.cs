@@ -1,4 +1,6 @@
-﻿namespace Domain.Core.Users
+﻿using Domain.Core.Users.Roles;
+
+namespace Domain.Core.Users
 {
     public class User : Model
     {
@@ -9,6 +11,6 @@
         public DateOnly? DateOfBirth { get; set; }
 
         public UserCredentials Credentials { get; set; }
-
+        public IEnumerable<Role> Roles { get; set; }
     }
 }

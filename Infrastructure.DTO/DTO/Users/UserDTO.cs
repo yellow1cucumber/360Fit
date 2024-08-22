@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.DTO.Sells
+﻿using Domain.Core.Users.Roles;
+
+namespace Infrastructure.DTO.Sells
 {
     public class UserDTO
     {
@@ -9,6 +11,6 @@
         public DateOnly? DateOfBirth { get; set; }
 
         public UserCredentialsDTO Credentials { get; set; }
-
+        public IEnumerable<Role> Roles { get; set; }
     }
 }
