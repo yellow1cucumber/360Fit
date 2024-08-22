@@ -1,15 +1,14 @@
-﻿using Domain.Core.Organization.Contact;
-using Domain.Core.Sells;
-using Domain.Core.Sells.Products;
-using Domain.Core.Sells.Service;
-using Domain.Core.Users;
+﻿using Infrastructure.DTO.Organization.Contact;
+using Infrastructure.DTO.Sells;
+using Infrastructure.DTO.Sells.Products;
+using Infrastructure.DTO.Sells.Service;
 
-namespace Domain.Core.Organization
+namespace Infrastructure.DTO.Organization
 {
     public class CompanyDTO
     {
         public string PublicName { get; set; }
-        public string Description {  get; set; }
+        public string Description { get; set; }
 
         public CompanyCategory Category { get; set; }
 

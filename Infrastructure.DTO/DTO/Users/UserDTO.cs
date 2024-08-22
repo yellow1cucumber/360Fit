@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Users
+﻿namespace Infrastructure.DTO.Sells
 {
     public class UserDTO
     {
@@ -9,6 +9,6 @@
         public DateOnly? DateOfBirth { get; set; }
 
         public UserCredentialsDTO Credentials { get; set; }
-        
+
     }
 }

@@ -1,6 +1,6 @@
-﻿using Domain.Core.Organization;
+﻿using Infrastructure.DTO.Organization;
 
-namespace Domain.Core.Sells.Products
+namespace Infrastructure.DTO.Sells.Products
 {
     public class CashRegisterDTO
     {

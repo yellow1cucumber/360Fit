@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Sells
+﻿namespace Infrastructure.DTO.Sells
 {
     public class SalableObjectDTO
     {
