@@ -1,6 +1,6 @@
 ﻿using Infrastructure.DTO.Users.Role;
 
-namespace Infrastructure.DTO.Sells
+namespace Infrastructure.DTO.Users
 {
     public class UserCredentialsDTO
     {

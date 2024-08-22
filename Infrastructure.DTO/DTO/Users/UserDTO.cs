@@ -1,6 +1,6 @@
 ﻿using Domain.Core.Users.Roles;
 
-namespace Infrastructure.DTO.Sells
+namespace Infrastructure.DTO.Users
 {
     public class UserDTO
     {
