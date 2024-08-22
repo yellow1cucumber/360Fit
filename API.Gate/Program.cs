@@ -4,6 +4,7 @@ using API.Gate.GraphQl.Mutations;
 using API.Gate.GraphQl.Redis;
 using API.Gate.GraphQl.Subscriptions;
 using DAL;
+using Infrastructure.DTO.Profiles;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -13,6 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(
+    typeof(UsersProfile),
+    typeof(SellsProfile),
+    typeof(OrganizationProfile)
+    );
+
 
 builder.Services.AddTransient<RedisConnection>();
 
