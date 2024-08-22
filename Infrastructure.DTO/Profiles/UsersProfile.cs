@@ -7,8 +7,8 @@ namespace Infrastructure.DTO.Profiles
     {
         public UsersProfile()
         {
-            this.CreateMap<User, UserDTO>();
-            this.CreateMap<UserCredentials, UserCredentialsDTO>();
+            this.CreateMap<User, UserDTO>().ReverseMap();
+            this.CreateMap<UserCredentials, UserCredentialsDTO>().ReverseMap();
         }
     }
 }

@@ -8,11 +8,11 @@ namespace Infrastructure.DTO.Profiles
     {
         public OrganizationProfile()
         {
-            this.CreateMap<Contacts, ContactsDTO>();
-            this.CreateMap<PhoneNumber, PhoneNumberDTO>();
-            this.CreateMap<BankRequisites, BankRequisitesDTO>();
-            this.CreateMap<Company, CompanyDTO>();
-            this.CreateMap<Requisites, RequisitesDTO>();
+            this.CreateMap<Contacts, ContactsDTO>().ReverseMap();
+            this.CreateMap<PhoneNumber, PhoneNumberDTO>().ReverseMap();
+            this.CreateMap<BankRequisites, BankRequisitesDTO>().ReverseMap();
+            this.CreateMap<Company, CompanyDTO>().ReverseMap();
+            this.CreateMap<Requisites, RequisitesDTO>().ReverseMap();
         }
     }
 }
