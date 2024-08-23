@@ -1,4 +1,5 @@
 ﻿using API.Gate.GraphQl.Exceptions;
+using AutoMapper;
 using DAL;
 using Domain.ClienLogging;
 using HotChocolate.Subscriptions;
@@ -12,26 +13,31 @@ namespace API.Gate.GraphQl.Mutations
         private readonly Context context;
         private readonly Repository<ClientLog> repository;
 
-        public ClientLogsMutations([Service] Context context)
+        private readonly IMapper mapper;
+
+        public ClientLogsMutations([Service] Context context, IMapper mapper)
         {
             this.context = context;
             this.repository = new Repository<ClientLog>(context);
+            this.mapper = mapper;
         }
 
         [UseSorting]
         [UseFiltering]
-        public async Task<ClientLog> CreateClientLog(ClientLog clientLog,
+        public async Task<ClientLog> CreateClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
+            var clientLog = this.mapper.Map<ClientLog>(payload);
             await this.repository.CreateAsync(clientLog);
             return clientLog;
         }
 
         [UseSorting]
         [UseFiltering]
-        public async Task<ClientLog> UpdateClientLog(ClientLog clientLog,
+        public async Task<ClientLog> UpdateClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
+            var clientLog = this.mapper.Map<ClientLog>(payload);
             try
             {
                 await this.repository.UpdateAsync(clientLog);
@@ -48,9 +54,10 @@ namespace API.Gate.GraphQl.Mutations
         }
 
         [UseFiltering]
-        public async Task<ClientLog> RemoveClientLog(ClientLog clientLog,
+        public async Task<ClientLog> RemoveClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
+            var clientLog = this.mapper.Map<ClientLog>(payload);
             try
             {
                 await this.repository.DeleteAsync(clientLog.Id);
