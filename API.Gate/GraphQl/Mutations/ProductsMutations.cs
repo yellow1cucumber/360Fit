@@ -3,6 +3,8 @@ using Domain.Core.Sells.Products;
 using API.Gate.GraphQl.Exceptions;
 using HotChocolate.Subscriptions;
 using API.Gate.GraphQl.Subscriptions;
+using AutoMapper;
+using Infrastructure.DTO.Sells.Products;
 
 
 namespace API.Gate.GraphQl.Mutations
@@ -13,16 +15,20 @@ namespace API.Gate.GraphQl.Mutations
         private readonly Context context;
         private readonly Repository<Product> repository;
 
-        public ProductsMutations([Service] Context context)
+        private readonly IMapper mapper;
+
+        public ProductsMutations([Service] Context context, IMapper mapper)
         {
             this.context = context;
             this.repository = new Repository<Product>(context);
+            this.mapper = mapper;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Product> CreateProduct(Product product, [Service] ITopicEventSender sender)
+        public async Task<Product> CreateProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
+            var product = this.mapper.Map<Product>(payload);
             await this.repository.CreateAsync(product);
             await sender.SendAsync(nameof(ProductsSubscription.OnProductCreated), product);
             return product;
@@ -30,8 +36,9 @@ namespace API.Gate.GraphQl.Mutations
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Product> UpdateProduct(Product product, [Service] ITopicEventSender sender)
+        public async Task<Product> UpdateProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
+            var product = this.mapper.Map<Product>(payload);
             try
             {
                 await this.repository.UpdateAsync(product);
@@ -50,8 +57,9 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<Product> RemoveProduct(Product product, [Service] ITopicEventSender sender)
+        public async Task<Product> RemoveProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
+            var product = this.mapper.Map<Product>(payload);
             try
             {
                 await this.repository.DeleteAsync(product.Id);
