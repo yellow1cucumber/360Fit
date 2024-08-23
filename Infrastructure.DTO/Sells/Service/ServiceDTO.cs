@@ -1,7 +1,7 @@
-﻿using Domain.Core.Organization;
-using Domain.Core.Users;
+﻿using Infrastructure.DTO.Organization;
+using Infrastructure.DTO.Users;
 
-namespace Domain.Core.Sells.Service
+namespace Infrastructure.DTO.Sells.Service
 {
     public class ServiceDTO : SalableObjectDTO
     {

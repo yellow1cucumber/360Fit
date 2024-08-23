@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Core.Users;
+using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Profiles
 {

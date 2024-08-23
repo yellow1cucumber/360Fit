@@ -1,6 +1,6 @@
-﻿using Domain.Core.Users;
+﻿using Infrastructure.DTO.Users;
 
-namespace Domain.Core.Sells.Service
+namespace Infrastructure.DTO.Sells.Service
 {
     public class CardDTO
     {

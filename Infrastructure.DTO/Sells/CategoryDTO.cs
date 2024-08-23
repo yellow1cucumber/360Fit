@@ -1,7 +1,7 @@
-﻿namespace Domain.Core.Sells
+﻿namespace Infrastructure.DTO.Sells
 {
     public class CategoryDTO
-    {        
+    {
         public string Name { get; set; }
         public string Description { get; set; }
 

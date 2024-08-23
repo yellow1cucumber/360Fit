@@ -1,8 +1,8 @@
 ﻿using Domain.Core.Users.Roles;
 
-namespace Domain.Core.Users
+namespace Infrastructure.DTO.Users
 {
-    public class User : Model
+    public class UserDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -10,7 +10,7 @@ namespace Domain.Core.Users
         public string? Email { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
-        public UserCredentials Credentials { get; set; }
+        public UserCredentialsDTO Credentials { get; set; }
         public IEnumerable<Role> Roles { get; set; }
     }
 }

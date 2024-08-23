@@ -3,6 +3,10 @@ using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
+using Infrastructure.DTO.Sells;
+using Infrastructure.DTO.Sells.PaymentRules;
+using Infrastructure.DTO.Sells.Products;
+using Infrastructure.DTO.Sells.Service;
 
 namespace Infrastructure.DTO.Profiles
 {
