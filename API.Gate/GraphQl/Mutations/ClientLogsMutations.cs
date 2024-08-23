@@ -1,8 +1,8 @@
 ﻿using API.Gate.GraphQl.Exceptions;
 using DAL;
 using Domain.ClienLogging;
-using Domain.Core.Users;
 using HotChocolate.Subscriptions;
+
 
 namespace API.Gate.GraphQl.Mutations
 {
