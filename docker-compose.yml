@@ -1,6 +1,8 @@
 version: '3.4'
 name: 360fit
 
+#BACKEND+FRONTEND CONFIG
+
 services:
   api.gate:
     container_name: API
