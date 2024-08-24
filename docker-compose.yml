@@ -1,21 +1,25 @@
-version: '3.4'
-name: 360fit
-
-#BACKEND+FRONTEND CONFIG
-
 services:
-  api.gate:
-    container_name: API
-    image: ${DOCKER_REGISTRY-}apigate
-    build:
-      context: .
-      dockerfile: API.Gate/Dockerfile
-
   api.auth:
     image: ${DOCKER_REGISTRY-}apiauth
     build:
-      context: .
-      dockerfile: API.Auth/Dockerfile
+      context: ..
+      dockerfile: 360Fit/API.Auth/Dockerfile
+
+  api.gate:
+    image: ${DOCKER_REGISTRY-}apigate
+    build:
+      context: ..
+      dockerfile: 360Fit/API.Gate/Dockerfile
+
+  client:
+    image: client
+    build:
+      context: ../frondent-f360fit
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443" 
+
 
   postgres:
     container_name: PostgreSQL

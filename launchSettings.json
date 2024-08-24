@@ -10,7 +10,8 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "api.auth": "StartDebugging",
+        "client": "StartWithoutDebugging"
       }
     },
     "API.Auth - swagger": {
@@ -23,7 +24,8 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "api.auth": "StartDebugging",
+        "client": "StartWithoutDebugging"
       }
     },
     "GraphQL": {
@@ -36,7 +38,22 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "api.auth": "StartDebugging",
+        "client": "StartWithoutDebugging"
+      }
+    },
+    "ClientApp": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "client",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
+      "serviceActions": {
+        "api.gate": "StartDebugging",
+        "postgres": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging",
+        "api.auth": "StartDebugging",
+        "client": "StartWithoutDebugging"
       }
     }
   }
