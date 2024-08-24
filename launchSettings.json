@@ -47,7 +47,7 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "client",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
+      "composeLaunchUrl": "http://localhost",
       "serviceActions": {
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
