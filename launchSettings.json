@@ -9,8 +9,7 @@
       "serviceActions": {
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
-        "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "redis": "StartWithoutDebugging"
       }
     },
     "API.Auth - swagger": {
@@ -22,8 +21,7 @@
       "serviceActions": {
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
-        "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "redis": "StartWithoutDebugging"
       }
     },
     "GraphQL": {
@@ -35,8 +33,7 @@
       "serviceActions": {
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
-        "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging"
+        "redis": "StartWithoutDebugging"
       }
     }
   }
