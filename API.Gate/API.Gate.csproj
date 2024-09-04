@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\Domain.ClienLogging\Domain.ClientLogging.csproj" />
     <ProjectReference Include="..\Infrastructure.DTO\Infrastructure.DTO.csproj" />
   </ItemGroup>
 
