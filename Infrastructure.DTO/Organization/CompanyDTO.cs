@@ -3,6 +3,7 @@ using Infrastructure.DTO.Sells;
 using Infrastructure.DTO.Sells.Products;
 using Infrastructure.DTO.Sells.Service;
 using Infrastructure.DTO.Users;
+using Domain.Core.Organization;
 
 namespace Infrastructure.DTO.Organization
 {
@@ -11,7 +12,7 @@ namespace Infrastructure.DTO.Organization
         public string PublicName { get; set; }
         public string Description { get; set; }
 
-        public CompanyCategory Category { get; set; }
+        public Company.CompanyCategory Category { get; set; }
 
         public RequisitesDTO Requisites { get; set; }
         public ContactsDTO Contacts { get; set; }
@@ -27,14 +28,5 @@ namespace Infrastructure.DTO.Organization
         public IEnumerable<ServiceDTO> Services { get; set; }
 
         public IEnumerable<PaymentDTO> Payment { get; set; }
-
-
-        public enum CompanyCategory
-        {
-            Developer = 0,
-            FitnessCentre = 1,
-            SportsNutritionStore = 2,
-            SportsNutritionSupplier = 3
-        }
     }
 }

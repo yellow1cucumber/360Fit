@@ -1,10 +1,11 @@
 ﻿using Infrastructure.DTO.Users;
+using Domain.Core.Organization;
 
 namespace Infrastructure.DTO.Organization
 {
     public class RequisitesDTO
     {
-        public OrganizationTypes OrganizationType { get; set; }
+        public Requisites.OrganizationTypes OrganizationType { get; set; }
 
         public string NameKZ { get; set; }
         public string NameRU { get; set; }
@@ -19,13 +20,5 @@ namespace Infrastructure.DTO.Organization
         public string? PhysicalAddress { get; set; }
 
         public IEnumerable<BankRequisitesDTO> BankRequisites { get; set; }
-
-
-        public enum OrganizationTypes
-        {
-            IE = 0,
-            LLP = 1,
-            JSC = 2,
-        }
     }
 }
