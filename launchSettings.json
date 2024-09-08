@@ -13,19 +13,6 @@
         "client": "StartWithoutDebugging"
       }
     },
-    "API.Auth - swagger": {
-      "commandName": "DockerCompose",
-      "commandVersion": "1.0",
-      "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "api.auth",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
-      "serviceActions": {
-        "api.gate": "StartDebugging",
-        "postgres": "StartWithoutDebugging",
-        "redis": "StartWithoutDebugging",
-        "client": "StartWithoutDebugging"
-      }
-    },
     "GraphQL": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
