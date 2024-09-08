@@ -10,7 +10,6 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging",
         "client": "StartWithoutDebugging"
       }
     },
@@ -24,7 +23,6 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging",
         "client": "StartWithoutDebugging"
       }
     },
@@ -38,7 +36,6 @@
         "api.gate": "StartDebugging",
         "postgres": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "api.auth": "StartDebugging",
         "client": "StartWithoutDebugging"
       }
     },
