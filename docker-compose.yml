@@ -2,11 +2,19 @@ name: 360fit
 
 services:
   api.gate:
-    container_name: API
     image: ${DOCKER_REGISTRY-}apigate
     build:
-      context: .
-      dockerfile: API.Gate/Dockerfile
+      context: ..
+      dockerfile: 360Fit/API.Gate/Dockerfile
+
+  client:
+    image: client
+    build:
+      context: ../frondent-f360fit
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443" 
 
   postgres:
     container_name: PostgreSQL
