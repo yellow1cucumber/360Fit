@@ -8,7 +8,6 @@ using Infrastructure.DTO.Profiles;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using Keycloak.AuthServices.Authentication;
-using Keycloak.AuthServices.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
