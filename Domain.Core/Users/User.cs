@@ -12,6 +12,7 @@ namespace Domain.Core.Users
         public DateOnly? DateOfBirth { get; set; }
 
         public Card? Card { get; set; }
+        public double Deposit { get; set; }
 
         public UserCredentials Credentials { get; set; }
         public IEnumerable<Role> Roles { get; set; }
