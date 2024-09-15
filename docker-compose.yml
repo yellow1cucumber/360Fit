@@ -6,6 +6,11 @@ services:
     build:
       context: ..
       dockerfile: 360Fit/API.Gate/Dockerfile
+    ports:
+      - "7070:7070"
+      - "7071:7071"
+    volumes:
+      - ./certs:/https/certs
 
   client:
     image: client
@@ -84,7 +89,7 @@ services:
       KC_DB_USERNAME: ${POSTGRES_USER}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - 8080:8080
+      - "8080:8080"
     restart: always
     depends_on:
       - postgres

@@ -8,8 +8,22 @@ using Infrastructure.DTO.Profiles;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using Keycloak.AuthServices.Authentication;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region HTTPS
+builder.WebHost.UseSetting("DOTNET_USE_DEV_CERTIFICATE", "false");
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 7070);
+    options.Listen(IPAddress.Any, 7071, listenOptions =>
+    {
+        listenOptions.UseHttps("/https/certs/360Fit-API-pfx-dev.pfx", "Tiberium13");
+    });
+});
+#endregion
+
 
 #region Services
 builder.Services.AddControllers();

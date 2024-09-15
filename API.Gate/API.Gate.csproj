@@ -10,6 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Certs\**" />
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Certs\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Certs\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Certs\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.9.11" />
     <PackageReference Include="HotChocolate.Data" Version="13.9.11" />
@@ -32,10 +43,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Infrastructure.DTO\Infrastructure.DTO.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
