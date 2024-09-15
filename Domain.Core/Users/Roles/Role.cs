@@ -2,7 +2,7 @@
 
 namespace Domain.Core.Users.Roles
 {
-    public class Role
+    public class Role : Model
     {
         public Type UserType { get; set; }
         public Company Company { get; set; }
