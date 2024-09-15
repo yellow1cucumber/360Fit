@@ -20,6 +20,8 @@ services:
     ports:
       - "80:80"
       - "443:443" 
+    volumes:
+      - ./certs:/https/certs
 
   postgres:
     container_name: PostgreSQL
