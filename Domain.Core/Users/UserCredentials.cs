@@ -8,6 +8,5 @@ namespace Domain.Core.Users
         public string Password { get; set; }
 
         public int UserId { get; set; }
-        public Role Role { get; set; }
     }
 }
