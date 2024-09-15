@@ -1,4 +1,5 @@
-﻿using Domain.Core.Users.Roles;
+﻿using Domain.Core.Sells.Service;
+using Domain.Core.Users.Roles;
 
 namespace Domain.Core.Users
 {
@@ -9,6 +10,8 @@ namespace Domain.Core.Users
         public string Patronomic { get; set; }
         public string? Email { get; set; }
         public DateOnly? DateOfBirth { get; set; }
+
+        public Card? Card { get; set; }
 
         public UserCredentials Credentials { get; set; }
         public IEnumerable<Role> Roles { get; set; }
