@@ -24,6 +24,6 @@ RUN dotnet publish "./API.Gate.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY ./certs/360Fit-API-pfx-dev.pfx /https/certs/360Fit-API-pfx-dev.pfx
+COPY ./certs/API.Gate/360Fit-API-pfx-dev.pfx /https/certs/360Fit-API-pfx-dev.pfx
 RUN chmod 644 /https/certs/360Fit-API-pfx-dev.pfx
 ENTRYPOINT ["dotnet", "API.Gate.dll"]
