@@ -17,6 +17,7 @@ namespace DAL
 
         #region Users
         public DbSet<User> Users { get; set; }
+        public DbSet<UserCredentials> UserCredentials { get; set; }
         #endregion
 
         #region Service
@@ -53,6 +54,18 @@ namespace DAL
                 .HasOne(u => u.Credentials)
                 .WithOne()
                 .HasForeignKey<UserCredentials>(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Card)
+                .WithOne()
+                .HasForeignKey<Card>(uc => uc.Owner)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Credentials)
+                .WithOne()
+                .HasForeignKey<UserCredentials>(u => u.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -1,14 +1,13 @@
 name: 360fit
-
 services:
   api.gate:
-    image: ${DOCKER_REGISTRY-}apigate
+    image: apigate
     build:
       context: ..
       dockerfile: 360Fit/API.Gate/Dockerfile
     ports:
-      - "7070:7070"
-      - "7071:7071"
+      - 7070:7070
+      - 7071:7071
     volumes:
       - ./certs:/https/certs
 
@@ -18,22 +17,34 @@ services:
       context: ../frondent-f360fit
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443" 
+      - 80:80
+      - 443:443
     volumes:
       - ./certs:/https/certs
 
-  postgres:
-    container_name: PostgreSQL
+  360Services-db:
+    container_name: 360Services-postgres
     image: postgres:latest
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${SERVICES_DB_USER}
+      POSTGRES_PASSWORD: ${SERVICES_DB_PASSWORD}
+      POSTGRES_DB: ${SERVICES_DB_DB}
     ports:
-      - "5432:5432"
+      - 33656:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - 360Services_data:/var/lib/postgresql/data
+
+  360Fit-db:
+    container_name: 360Fit-postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${FIT_DB_USER}
+      POSTGRES_PASSWORD: ${FIT_DB_PASSWORD}
+      POSTGRES_DB: ${FIT_DB_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - 360Fit_data:/var/lib/postgresql/data
 
   redis:
     image: redis:latest
@@ -43,29 +54,34 @@ services:
       - REDIS_USER=${REDIS_USER}
       - REDIS_USER_PASSWORD=${REDIS_USER_PASSWORD}
     ports:
-      - "6379:6379"
+      - 6379:6379
     volumes:
       - ./redisdata:/data
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: "0.50"
           memory: 512M
         reservations:
-          cpus: '0.25'
+          cpus: "0.25"
           memory: 256M
     command: >
-        sh -c '
-        mkdir -p /usr/local/etc/redis &&
-        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
-        echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf &&
-        echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
-        echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
-        echo "user default on nopass ~* +@all" > /usr/local/etc/redis/users.acl &&
-        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* &* +@all" >> /usr/local/etc/redis/users.acl &&
-        redis-server /usr/local/etc/redis/redis.conf --aclfile /usr/local/etc/redis/users.acl'
+      sh -c ' mkdir -p /usr/local/etc/redis && echo "bind 0.0.0.0" >
+      /usr/local/etc/redis/redis.conf && echo "requirepass $REDIS_PASSWORD" >>
+      /usr/local/etc/redis/redis.conf && echo "appendonly yes" >>
+      /usr/local/etc/redis/redis.conf && echo "appendfsync everysec" >>
+      /usr/local/etc/redis/redis.conf && echo "user default on nopass ~* +@all"
+      > /usr/local/etc/redis/users.acl && echo "user $REDIS_USER on
+      >$REDIS_USER_PASSWORD ~* &* +@all" >> /usr/local/etc/redis/users.acl &&
+      redis-server /usr/local/etc/redis/redis.conf --aclfile
+      /usr/local/etc/redis/users.acl'
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "ping"]
+      test:
+        - CMD
+        - redis-cli
+        - -a
+        - $REDIS_PASSWORD
+        - ping
       interval: 30s
       timeout: 10s
       retries: 5
@@ -87,17 +103,18 @@ services:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_DB_URL: jdbc:postgresql://360Services-db/${SERVICES_DB_DB}
+      KC_DB_USERNAME: ${SERVICES_DB_USER}
+      KC_DB_PASSWORD: ${SERVICES_DB_PASSWORD}
     ports:
-      - "8080:8080"
+      - 8080:8080
     restart: always
     depends_on:
-      - postgres
+      - 360Services-db
     volumes:
       - keycloak_data:/opt/keycloak/data
 
 volumes:
-  postgres_data:
-  keycloak_data:
+  360Services_data: null
+  360Fit_data: null
+  keycloak_data: null

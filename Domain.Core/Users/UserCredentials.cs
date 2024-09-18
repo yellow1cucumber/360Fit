@@ -1,6 +1,4 @@
-﻿using Domain.Core.Users.Roles;
-
-namespace Domain.Core.Users
+﻿namespace Domain.Core.Users
 {
     public class UserCredentials : Model
     {

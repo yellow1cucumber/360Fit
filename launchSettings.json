@@ -9,7 +9,8 @@
       "serviceActions": {
         "api.gate": "StartDebugging",
         "client": "StartWithoutDebugging",
-        "postgres": "StartWithoutDebugging",
+        "360Fit-db": "StartWithoutDebugging",
+        "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
         "oauth_service": "StartWithoutDebugging"
       }
@@ -23,7 +24,8 @@
       "serviceActions": {
         "api.gate": "StartDebugging",
         "client": "StartWithoutDebugging",
-        "postgres": "StartWithoutDebugging",
+        "360Fit-db": "StartWithoutDebugging",
+        "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
         "oauth_service": "StartWithoutDebugging"
       }
