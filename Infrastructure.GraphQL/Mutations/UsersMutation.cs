@@ -1,13 +1,16 @@
-﻿using API.Gate.GraphQl.Exceptions;
-using AutoMapper;
+﻿using AutoMapper;
 using DAL;
 using Domain.Core.Users;
 using HotChocolate.Subscriptions;
 using Infrastructure.DTO.Users;
+
 using Infrastructure.GraphQL.Subscriptions;
+using Infrastructure.GraphQL.Exceptions;
+using Infrastructure.GraphQL.Attributes;
 
 namespace Infrastructure.GraphQL.Mutations
 {
+    [GQLMutation]
     [ExtendObjectType("Mutations")]
     public class UsersMutation
     {
