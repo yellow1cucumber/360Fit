@@ -1,8 +1,11 @@
 ﻿using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 
-namespace API.Gate.GraphQl.Subscriptions
+using Infrastructure.GraphQL.Attributes;
+
+namespace Infrastructure.GraphQL.Subscriptions
 {
+    [GQLSubscription]
     [ExtendObjectType("Subscriptions")]
     public class SellsSubscription
     {
@@ -12,7 +15,7 @@ namespace API.Gate.GraphQl.Subscriptions
             => paymentDate;
 
         [Subscribe]
-        public PaymentDate OnPaymentDateChanged([EventMessage] PaymentDate paymentDate) 
+        public PaymentDate OnPaymentDateChanged([EventMessage] PaymentDate paymentDate)
             => paymentDate;
 
         [Subscribe]
