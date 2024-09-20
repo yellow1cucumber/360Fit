@@ -60,38 +60,6 @@ builder.Services.AddGQLService(options =>
     };
 });
 
-/*
-builder.Services.AddGraphQLServer()
-                .RegisterDbContext<Context>()
-                .AddProjections()
-                .AddFiltering()
-                .AddSorting()
-                .AddErrorFilter<ErrorFilter>()
-
-                .AddQueryType(q => q.Name("Query"))
-                    .AddType<UsersQuery>()
-                    .AddType<SellsQuery>()
-                    .AddType<ServicesQuery>()
-                    .AddType<ProductsQuery>()
-
-                .AddMutationType(m => m.Name("Mutations"))
-                    .AddType<UsersMutation>()
-                    .AddType<ProductsMutations>()
-                    .AddType<SellsMutation>()
-                    .AddType<ServiceMutations>()
-
-                .AddRedisSubscriptions( (sp) =>
-                {
-                    var con = new RedisConnection(builder.Configuration);
-                    var opt = con.GetConfigurationOptions();
-                    return ConnectionMultiplexer.Connect(opt);
-                })
-                .AddSubscriptionType(s => s.Name("Subscriptions"))
-                    .AddType<ProductsSubscription>()
-                    .AddType<SellsSubscription>()
-                    .AddType<ServiceSubscription>()
-                    .AddType<UsersSubscription>();*/
-
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 #endregion
 
