@@ -27,6 +27,18 @@ namespace Infrastructure.GraphQL
             return builder;
         }
 
+        private static IRequestExecutorBuilder AddMutations(this IRequestExecutorBuilder builder)
+        {
+            builder.AddMutationType(m => m.Name("Mutations"));
+            return builder;
+        }
+
+        private static IRequestExecutorBuilder AddSubscriptions(this IRequestExecutorBuilder builder)
+        {
+            builder.AddSubscriptionType(s => s.Name("Subscriptions"));
+            return builder;
+        }
+
         private static IEnumerable<Type> GetQueryTypes(Assembly assembly)
         {
             foreach (var type in assembly.GetTypes())
