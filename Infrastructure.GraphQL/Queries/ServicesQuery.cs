@@ -1,8 +1,11 @@
 ﻿using DAL;
 using Domain.Core.Sells.Service;
 
+using Infrastructure.GraphQL.Attributes;
+
 namespace Infrastructure.GraphQL.Queries
 {
+    [GQLQuery]
     [ExtendObjectType("Query")]
     public class ServicesQuery
     {
