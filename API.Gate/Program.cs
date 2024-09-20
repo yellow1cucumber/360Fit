@@ -1,14 +1,11 @@
-using API.Gate.GraphQl;
-using API.Gate.GraphQl.Exceptions;
-using API.Gate.GraphQl.Mutations;
-using API.Gate.GraphQl.Redis;
-using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Infrastructure.DTO.Profiles;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using Keycloak.AuthServices.Authentication;
 using System.Net;
+using Infrastructure.GraphQL;
+using Infrastructure.GraphQL.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +47,20 @@ builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
                                  opt => opt.MigrationsAssembly("API.Gate")));
 
+builder.Services.AddGQLService(options =>
+{
+    options.ConfigureSubscriptions = (sp, gqlBuilder) =>
+    {
+        gqlBuilder.AddRedisSubscriptions(_ =>
+        {
+            var con = new RedisConnection(builder.Configuration);
+            var opt = con.GetConfigurationOptions();
+            return ConnectionMultiplexer.Connect(opt);
+        });
+    };
+});
+
+/*
 builder.Services.AddGraphQLServer()
                 .RegisterDbContext<Context>()
                 .AddProjections()
@@ -79,7 +90,7 @@ builder.Services.AddGraphQLServer()
                     .AddType<ProductsSubscription>()
                     .AddType<SellsSubscription>()
                     .AddType<ServiceSubscription>()
-                    .AddType<UsersSubscription>();
+                    .AddType<UsersSubscription>();*/
 
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 #endregion

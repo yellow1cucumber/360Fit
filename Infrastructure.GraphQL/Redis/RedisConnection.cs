@@ -1,6 +1,8 @@
-﻿using StackExchange.Redis;
+﻿using Microsoft.Extensions.Configuration;
 
-namespace API.Gate.GraphQl.Redis
+using StackExchange.Redis;
+
+namespace Infrastructure.GraphQL.Redis
 {
     public class RedisConnection
     {
@@ -11,13 +13,13 @@ namespace API.Gate.GraphQl.Redis
 
         public ConfigurationOptions GetConfigurationOptions()
         {
-            var url = this.configuration["Redis:URL"]
+            var url = configuration["Redis:URL"]
                 ?? throw new NullReferenceException();
-            var port = this.configuration["Redis:Port"]
+            var port = configuration["Redis:Port"]
                 ?? throw new NullReferenceException();
-            var user = this.configuration["Redis:User"]
+            var user = configuration["Redis:User"]
                 ?? throw new NullReferenceException();
-            var password = this.configuration["Redis:Password"] 
+            var password = configuration["Redis:Password"]
                 ?? throw new NullReferenceException();
 
             var options = new ConfigurationOptions()

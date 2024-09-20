@@ -22,10 +22,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="13.9.11" />
-    <PackageReference Include="HotChocolate.Data" Version="13.9.11" />
-    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.9.11" />
-    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="13.9.11" />
+    <PackageReference Include="HotChocolate.AspNetCore.Subscriptions" Version="10.5.5" />
+    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="13.9.12" />
     <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
     <PackageReference Include="Keycloak.AuthServices.Common" Version="2.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
@@ -37,6 +35,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
   </ItemGroup>
 
@@ -44,6 +43,7 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Domain.ClientLogging\Domain.ClientLogging.csproj" />
     <ProjectReference Include="..\Infrastructure.DTO\Infrastructure.DTO.csproj" />
+    <ProjectReference Include="..\Infrastructure.GraphQL\Infrastructure.GraphQL.csproj" />
   </ItemGroup>
 
 </Project>

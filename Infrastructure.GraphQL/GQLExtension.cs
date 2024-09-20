@@ -10,16 +10,25 @@ namespace Infrastructure.GraphQL
 {
     public static class GQLExtension
     {
-        public static IServiceCollection AddGQLService(this IServiceCollection services)
+        public static IServiceCollection AddGQLService(this IServiceCollection services, Action<GQLOptions> configureOptions)
         {
-            services.AddGraphQLServer()
-                    .RegisterDbContext<Context>()
-                    .AddProjections()
-                    .AddFiltering()
-                    .AddSorting();                    
+            var gqlOptions = new GQLOptions();
+            configureOptions?.Invoke(gqlOptions);
+
+            var graphQLBuilder = services.AddGraphQLServer()
+                                         .RegisterDbContext<Context>()
+                                         .AddProjections()
+                                         .AddFiltering()
+                                         .AddSorting()
+                                         .AddQueries()
+                                         .AddMutations()
+                                         .AddSubscriptions();
+
+            gqlOptions.ConfigureSubscriptions?.Invoke(services.BuildServiceProvider(), graphQLBuilder);
 
             return services;
         }
+
 
         private static IRequestExecutorBuilder AddQueries(this IRequestExecutorBuilder builder)
         {
