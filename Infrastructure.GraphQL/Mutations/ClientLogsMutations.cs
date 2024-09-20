@@ -5,7 +5,7 @@ using Domain.ClienLogging;
 using HotChocolate.Subscriptions;
 
 
-namespace API.Gate.GraphQl.Mutations
+namespace Infrastructure.GraphQL.Mutations
 {
     [ExtendObjectType("Mutations")]
     public class ClientLogsMutations
@@ -18,7 +18,7 @@ namespace API.Gate.GraphQl.Mutations
         public ClientLogsMutations([Service] Context context, IMapper mapper)
         {
             this.context = context;
-            this.repository = new Repository<ClientLog>(context);
+            repository = new Repository<ClientLog>(context);
             this.mapper = mapper;
         }
 
@@ -27,8 +27,8 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<ClientLog> CreateClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
-            var clientLog = this.mapper.Map<ClientLog>(payload);
-            await this.repository.CreateAsync(clientLog);
+            var clientLog = mapper.Map<ClientLog>(payload);
+            await repository.CreateAsync(clientLog);
             return clientLog;
         }
 
@@ -37,10 +37,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<ClientLog> UpdateClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
-            var clientLog = this.mapper.Map<ClientLog>(payload);
+            var clientLog = mapper.Map<ClientLog>(payload);
             try
             {
-                await this.repository.UpdateAsync(clientLog);
+                await repository.UpdateAsync(clientLog);
                 return clientLog;
             }
             catch (ArgumentOutOfRangeException)
@@ -57,10 +57,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<ClientLog> RemoveClientLog(ClientLogDTO payload,
                                                     [Service] ITopicEventSender sender)
         {
-            var clientLog = this.mapper.Map<ClientLog>(payload);
+            var clientLog = mapper.Map<ClientLog>(payload);
             try
             {
-                await this.repository.DeleteAsync(clientLog.Id);
+                await repository.DeleteAsync(clientLog.Id);
                 return clientLog;
             }
             catch (ArgumentOutOfRangeException)

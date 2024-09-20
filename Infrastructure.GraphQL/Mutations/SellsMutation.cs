@@ -1,5 +1,4 @@
 ﻿using API.Gate.GraphQl.Exceptions;
-using API.Gate.GraphQl.Subscriptions;
 using AutoMapper;
 using DAL;
 using Domain.Core.Sells;
@@ -8,8 +7,9 @@ using Domain.Core.Sells.Service;
 using HotChocolate.Subscriptions;
 using Infrastructure.DTO.Sells;
 using Infrastructure.DTO.Sells.PaymentRules;
+using Infrastructure.GraphQL.Subscriptions;
 
-namespace API.Gate.GraphQl.Mutations
+namespace Infrastructure.GraphQL.Mutations
 {
     [ExtendObjectType("Mutations")]
     public class SellsMutation
@@ -24,9 +24,9 @@ namespace API.Gate.GraphQl.Mutations
         public SellsMutation([Service] Context context, IMapper mapper)
         {
             this.context = context;
-            this.paymentDateRepository = new Repository<PaymentDate>(context);
-            this.paymentRuleRepository = new Repository<PaymentRule>(context);
-            this.paymentRepository = new Repository<Payment>(context);
+            paymentDateRepository = new Repository<PaymentDate>(context);
+            paymentRuleRepository = new Repository<PaymentRule>(context);
+            paymentRepository = new Repository<Payment>(context);
             this.mapper = mapper;
         }
 
@@ -36,8 +36,8 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<PaymentDate> CreatePaymentDate(PaymentDateDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentDate = this.mapper.Map<PaymentDate>(payload);
-            await this.paymentDateRepository.CreateAsync(paymentDate);
+            var paymentDate = mapper.Map<PaymentDate>(payload);
+            await paymentDateRepository.CreateAsync(paymentDate);
             await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateCreated), paymentDate);
             return paymentDate;
         }
@@ -47,10 +47,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<PaymentDate> UpdatePaymentDate(PaymentDateDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentDate = this.mapper.Map<PaymentDate>(payload);
+            var paymentDate = mapper.Map<PaymentDate>(payload);
             try
             {
-                await this.paymentDateRepository.UpdateAsync(paymentDate);
+                await paymentDateRepository.UpdateAsync(paymentDate);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateChanged), paymentDate);
                 return paymentDate;
             }
@@ -66,13 +66,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<PaymentDate> RemovePaymentDate(PaymentDateDTO payload, 
+        public async Task<PaymentDate> RemovePaymentDate(PaymentDateDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentDate = this.mapper.Map<PaymentDate>(payload);
+            var paymentDate = mapper.Map<PaymentDate>(payload);
             try
             {
-                await this.paymentDateRepository.DeleteAsync(paymentDate.Id);
+                await paymentDateRepository.DeleteAsync(paymentDate.Id);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentDateRemoved), paymentDate);
                 return paymentDate;
             }
@@ -92,24 +92,24 @@ namespace API.Gate.GraphQl.Mutations
         #region PaymentRule
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentRule> CreatePaymentRule(PaymentRuleDTO payload, 
+        public async Task<PaymentRule> CreatePaymentRule(PaymentRuleDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentRule = this.mapper.Map<PaymentRule>(payload);
-            await this.paymentRuleRepository.CreateAsync(paymentRule);
+            var paymentRule = mapper.Map<PaymentRule>(payload);
+            await paymentRuleRepository.CreateAsync(paymentRule);
             await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleCreated), paymentRule);
             return paymentRule;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<PaymentRule> UpdatePaymentRule(PaymentRuleDTO payload, 
+        public async Task<PaymentRule> UpdatePaymentRule(PaymentRuleDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentRule = this.mapper.Map<PaymentRule>(payload);
+            var paymentRule = mapper.Map<PaymentRule>(payload);
             try
             {
-                await this.paymentRuleRepository.UpdateAsync(paymentRule);
+                await paymentRuleRepository.UpdateAsync(paymentRule);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleChanged), paymentRule);
                 return paymentRule;
             }
@@ -125,13 +125,13 @@ namespace API.Gate.GraphQl.Mutations
 
 
         [UseFiltering]
-        public async Task<PaymentRule> RemovePaymentRule(PaymentRuleDTO payload, 
+        public async Task<PaymentRule> RemovePaymentRule(PaymentRuleDTO payload,
                                                         [Service] ITopicEventSender sender)
         {
-            var paymentRule = this.mapper.Map<PaymentRule>(payload);
+            var paymentRule = mapper.Map<PaymentRule>(payload);
             try
             {
-                await this.paymentRuleRepository.DeleteAsync(paymentRule.Id);
+                await paymentRuleRepository.DeleteAsync(paymentRule.Id);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentRuleRemoved), paymentRule);
                 return paymentRule;
             }
@@ -154,21 +154,21 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<Payment> CreatePayment(PaymentDTO payload,
                                                 [Service] ITopicEventSender sender)
         {
-            var payment = this.mapper.Map<Payment>(payload);
-            await this.paymentRepository.CreateAsync(payment);
+            var payment = mapper.Map<Payment>(payload);
+            await paymentRepository.CreateAsync(payment);
             await sender.SendAsync(nameof(SellsSubscription.OnPaymentCreated), payment);
             return payment;
         }
 
         [UseProjection]
         [UseFiltering]
-        public async Task<Payment> UpdatePayment(PaymentDTO payload, 
+        public async Task<Payment> UpdatePayment(PaymentDTO payload,
                                                 [Service] ITopicEventSender sender)
         {
-            var payment = this.mapper.Map<Payment>(payload);
+            var payment = mapper.Map<Payment>(payload);
             try
             {
-                await this.paymentRepository.UpdateAsync(payment);
+                await paymentRepository.UpdateAsync(payment);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentCreated), payment);
                 return payment;
             }
@@ -187,10 +187,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<Payment> RemovePayment(PaymentDTO payload,
                                                 [Service] ITopicEventSender sender)
         {
-            var payment = this.mapper.Map<Payment>(payload);
+            var payment = mapper.Map<Payment>(payload);
             try
             {
-                await this.paymentRepository.DeleteAsync(payment.Id);
+                await paymentRepository.DeleteAsync(payment.Id);
                 await sender.SendAsync(nameof(SellsSubscription.OnPaymentRemoved), payment);
                 return payment;
             }

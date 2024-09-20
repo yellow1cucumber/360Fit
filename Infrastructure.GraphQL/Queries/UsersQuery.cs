@@ -1,8 +1,9 @@
 ﻿using DAL;
 using Domain.Core.Users;
 
-namespace API.Gate.GraphQl
+namespace Infrastructure.GraphQL.Queries
 {
+
     [ExtendObjectType("Query")]
     public class UsersQuery
     {

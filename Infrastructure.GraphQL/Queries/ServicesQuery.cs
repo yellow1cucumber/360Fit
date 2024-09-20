@@ -1,7 +1,7 @@
 ﻿using DAL;
 using Domain.Core.Sells.Service;
 
-namespace API.Gate.GraphQl
+namespace Infrastructure.GraphQL.Queries
 {
     [ExtendObjectType("Query")]
     public class ServicesQuery

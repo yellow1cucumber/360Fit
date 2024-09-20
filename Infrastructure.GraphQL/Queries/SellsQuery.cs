@@ -2,7 +2,7 @@
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 
-namespace API.Gate.GraphQl
+namespace Infrastructure.GraphQL.Queries
 {
     [ExtendObjectType("Query")]
     public class SellsQuery

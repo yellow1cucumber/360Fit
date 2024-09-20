@@ -1,7 +1,7 @@
 ﻿using DAL;
 using Domain.ClienLogging;
 
-namespace API.Gate.GraphQl.Queries
+namespace Infrastructure.GraphQL.Queries
 {
     [ExtendObjectType("Query")]
     public class ClientLogsQuery

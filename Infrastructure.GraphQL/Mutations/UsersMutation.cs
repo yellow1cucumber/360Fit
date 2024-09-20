@@ -1,12 +1,12 @@
 ﻿using API.Gate.GraphQl.Exceptions;
-using API.Gate.GraphQl.Subscriptions;
 using AutoMapper;
 using DAL;
 using Domain.Core.Users;
 using HotChocolate.Subscriptions;
 using Infrastructure.DTO.Users;
+using Infrastructure.GraphQL.Subscriptions;
 
-namespace API.Gate.GraphQl.Mutations
+namespace Infrastructure.GraphQL.Mutations
 {
     [ExtendObjectType("Mutations")]
     public class UsersMutation
@@ -20,8 +20,8 @@ namespace API.Gate.GraphQl.Mutations
         public UsersMutation([Service] Context context, IMapper mapper)
         {
             this.context = context;
-            this.usersRepository = new Repository<User>(context);
-            this.credentialsRepository = new Repository<UserCredentials>(context);
+            usersRepository = new Repository<User>(context);
+            credentialsRepository = new Repository<UserCredentials>(context);
 
             this.mapper = mapper;
         }
@@ -30,8 +30,8 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<User> CreateUser(UserDTO payload,
                                           [Service] ITopicEventSender sender)
         {
-            var user = this.mapper.Map<User>(payload);
-            await this.usersRepository.CreateAsync(user);
+            var user = mapper.Map<User>(payload);
+            await usersRepository.CreateAsync(user);
             await sender.SendAsync(nameof(UsersSubscription.OnUserCreated), user);
             return user;
         }
@@ -41,10 +41,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<User> UpdateUser(UserDTO payload,
                                           [Service] ITopicEventSender sender)
         {
-            var user = this.mapper.Map<User>(payload);
+            var user = mapper.Map<User>(payload);
             try
             {
-                await this.usersRepository.UpdateAsync(user);
+                await usersRepository.UpdateAsync(user);
                 await sender.SendAsync(nameof(UsersSubscription.OnUserChanged), user);
                 return user;
             }
@@ -55,7 +55,7 @@ namespace API.Gate.GraphQl.Mutations
             catch
             {
                 throw;
-            }            
+            }
         }
 
 
@@ -63,10 +63,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<User> RemoveUser(UserDTO payload,
                                           [Service] ITopicEventSender sender)
         {
-            var user = this.mapper.Map<User>(payload);
+            var user = mapper.Map<User>(payload);
             try
             {
-                await this.usersRepository.DeleteAsync(user.Id);
+                await usersRepository.DeleteAsync(user.Id);
                 await sender.SendAsync(nameof(UsersSubscription.OnUserRemoved), user);
                 return user;
             }
@@ -85,8 +85,8 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<UserCredentials> CreateUserCredentials(UserCredentialsDTO payload,
                                   [Service] ITopicEventSender sender)
         {
-            var userCredentials = this.mapper.Map<UserCredentials>(payload);
-            await this.credentialsRepository.CreateAsync(userCredentials);
+            var userCredentials = mapper.Map<UserCredentials>(payload);
+            await credentialsRepository.CreateAsync(userCredentials);
             await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsCreated), userCredentials);
             return userCredentials;
         }
@@ -96,10 +96,10 @@ namespace API.Gate.GraphQl.Mutations
         public async Task<UserCredentials> UpdateUser(UserCredentialsDTO payload,
                                           [Service] ITopicEventSender sender)
         {
-            var userCredentials = this.mapper.Map<UserCredentials>(payload);
+            var userCredentials = mapper.Map<UserCredentials>(payload);
             try
             {
-                await this.credentialsRepository.UpdateAsync(userCredentials);
+                await credentialsRepository.UpdateAsync(userCredentials);
                 await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsChanged), userCredentials);
                 return userCredentials;
             }

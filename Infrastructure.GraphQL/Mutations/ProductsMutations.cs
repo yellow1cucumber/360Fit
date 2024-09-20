@@ -2,12 +2,12 @@
 using Domain.Core.Sells.Products;
 using API.Gate.GraphQl.Exceptions;
 using HotChocolate.Subscriptions;
-using API.Gate.GraphQl.Subscriptions;
 using AutoMapper;
 using Infrastructure.DTO.Sells.Products;
+using Infrastructure.GraphQL.Subscriptions;
 
 
-namespace API.Gate.GraphQl.Mutations
+namespace Infrastructure.GraphQL.Mutations
 {
     [ExtendObjectType("Mutations")]
     public class ProductsMutations
@@ -20,7 +20,7 @@ namespace API.Gate.GraphQl.Mutations
         public ProductsMutations([Service] Context context, IMapper mapper)
         {
             this.context = context;
-            this.repository = new Repository<Product>(context);
+            repository = new Repository<Product>(context);
             this.mapper = mapper;
         }
 
@@ -28,8 +28,8 @@ namespace API.Gate.GraphQl.Mutations
         [UseFiltering]
         public async Task<Product> CreateProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
-            var product = this.mapper.Map<Product>(payload);
-            await this.repository.CreateAsync(product);
+            var product = mapper.Map<Product>(payload);
+            await repository.CreateAsync(product);
             await sender.SendAsync(nameof(ProductsSubscription.OnProductCreated), product);
             return product;
         }
@@ -38,10 +38,10 @@ namespace API.Gate.GraphQl.Mutations
         [UseFiltering]
         public async Task<Product> UpdateProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
-            var product = this.mapper.Map<Product>(payload);
+            var product = mapper.Map<Product>(payload);
             try
             {
-                await this.repository.UpdateAsync(product);
+                await repository.UpdateAsync(product);
                 await sender.SendAsync(nameof(ProductsSubscription.OnProductChanged), product);
                 return product;
             }
@@ -59,10 +59,10 @@ namespace API.Gate.GraphQl.Mutations
         [UseFiltering]
         public async Task<Product> RemoveProduct(ProductDTO payload, [Service] ITopicEventSender sender)
         {
-            var product = this.mapper.Map<Product>(payload);
+            var product = mapper.Map<Product>(payload);
             try
             {
-                await this.repository.DeleteAsync(product.Id);
+                await repository.DeleteAsync(product.Id);
                 await sender.SendAsync(nameof(ProductsSubscription.OnProductRemoved), product);
                 return product;
             }

@@ -1,6 +1,6 @@
 ﻿using Domain.Core.Sells.Products;
 
-namespace API.Gate.GraphQl.Subscriptions
+namespace Infrastructure.GraphQL.Subscriptions
 {
     [ExtendObjectType("Subscriptions")]
     public class ProductsSubscription
