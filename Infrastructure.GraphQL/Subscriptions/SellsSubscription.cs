@@ -1,8 +1,11 @@
 ﻿using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 
+using Infrastructure.GraphQL.Attributes;
+
 namespace Infrastructure.GraphQL.Subscriptions
 {
+    [GQLSubscription]
     [ExtendObjectType("Subscriptions")]
     public class SellsSubscription
     {

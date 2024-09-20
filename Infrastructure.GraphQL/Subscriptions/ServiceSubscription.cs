@@ -1,7 +1,10 @@
 ﻿using Domain.Core.Sells.Service;
 
+using Infrastructure.GraphQL.Attributes;
+
 namespace Infrastructure.GraphQL.Subscriptions
 {
+    [GQLSubscription]
     [ExtendObjectType("Subscriptions")]
     public class ServiceSubscription
     {

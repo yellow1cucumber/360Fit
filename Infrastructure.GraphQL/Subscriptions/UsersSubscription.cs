@@ -1,7 +1,10 @@
 ﻿using Domain.Core.Users;
 
+using Infrastructure.GraphQL.Attributes;
+
 namespace Infrastructure.GraphQL.Subscriptions
 {
+    [GQLSubscription]
     [ExtendObjectType("Subscriptions")]
     public class UsersSubscription
     {
