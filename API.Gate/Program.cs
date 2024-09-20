@@ -39,7 +39,8 @@ builder.Services.AddAutoMapper(
 builder.Services.AddTransient<RedisConnection>();
 
 builder.Services.AddCors(options =>
-    options.AddDefaultPolicy(builder => builder
+    options.AddPolicy("DEV_ALLOW_ALL", 
+        builder => builder
         .AllowAnyHeader()
         .AllowAnyOrigin()
         .AllowAnyMethod())
@@ -93,6 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("DEV_ALLOW_ALL");
 app.UseHttpsRedirection();
 app.UseWebSockets();
 app.UseAuthorization();
