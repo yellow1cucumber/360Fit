@@ -8,7 +8,7 @@ namespace API.Gate.Configuration
 {
     public static class DALExtension
     {
-        public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var dbStoredModels = GetDbStoredTypes(assembly, typeof(DALRepository));
