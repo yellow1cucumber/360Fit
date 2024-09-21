@@ -10,11 +10,14 @@ namespace API.Gate.Configuration
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var dbStoredModels = GetDbStoredTypes(assembly, typeof(DALRepository));
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            
+            var dbStoredModels = assemblies.SelectMany(assembly => GetDbStoredTypes(assembly, typeof(DALRepository)))
+                                            .ToList();
             foreach (var type in dbStoredModels)
             {
                 services.AddRepository(type);
+                Console.WriteLine(type.FullName);
             }
             return services;
         }
@@ -29,9 +32,9 @@ namespace API.Gate.Configuration
 
         private static IEnumerable<Type> GetDbStoredTypes(Assembly assembly, Type attributeType)
         {
-            foreach(var type in assembly.GetTypes())
+            foreach (var type in assembly.GetTypes())
             {
-                if(type.GetCustomAttributes(attributeType, true).Length > 0)
+                if (type.GetCustomAttributes(attributeType, true).Length > 0)
                 {
                     yield return type;
                 }
