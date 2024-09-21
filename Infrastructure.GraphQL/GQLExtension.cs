@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using DAL;
-
 using HotChocolate.Execution.Configuration;
 using Infrastructure.GraphQL.Attributes;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +14,6 @@ namespace Infrastructure.GraphQL
             configureOptions?.Invoke(gqlOptions);
 
             var graphQLBuilder = services.AddGraphQLServer()
-                                         .RegisterDbContext<Context>()
                                          .AddProjections()
                                          .AddFiltering()
                                          .AddSorting()
@@ -25,6 +22,7 @@ namespace Infrastructure.GraphQL
                                          .AddSubscriptions();
 
             gqlOptions.ConfigureSubscriptions?.Invoke(services.BuildServiceProvider(), graphQLBuilder);
+            gqlOptions.ConfigureDbContext?.Invoke(services.BuildServiceProvider(), graphQLBuilder);
 
             return services;
         }
