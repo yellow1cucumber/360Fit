@@ -1,7 +1,10 @@
 ﻿using Domain.Core.Organization;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.Core.Sells.Products
 {
+    [DALRepository]
     public class Storage : Model
     {
         public string Name { get; set; }

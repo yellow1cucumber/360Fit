@@ -6,6 +6,8 @@ using Keycloak.AuthServices.Authentication;
 using System.Net;
 using Infrastructure.GraphQL;
 using Infrastructure.GraphQL.Redis;
+using API.Gate.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
                                  opt => opt.MigrationsAssembly("API.Gate")));
+builder.Services.AddRepositories();
+
 
 builder.Services.AddGQLService(options =>
 {
@@ -57,6 +61,10 @@ builder.Services.AddGQLService(options =>
             var opt = con.GetConfigurationOptions();
             return ConnectionMultiplexer.Connect(opt);
         });
+    };
+    options.ConfigureDbContext = (sp, gqlBuilder) =>
+    {
+        gqlBuilder.RegisterDbContext<Context>();
     };
 });
 

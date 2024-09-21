@@ -1,8 +1,11 @@
 ﻿using Domain.Core.Sells.Service;
 using Domain.Core.Users.Roles;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.Core.Users
 {
+    [DALRepository]
     public class User : Model
     {
         public string Name { get; set; }

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
-using DAL;
 using Domain.ClienLogging;
 using HotChocolate.Subscriptions;
 
 using Infrastructure.GraphQL.Exceptions;
 using Infrastructure.GraphQL.Attributes;
+
+#region TYPEDEF
+using Logs = DAL.Repository<Domain.ClienLogging.ClientLog>;
+#endregion
 
 
 namespace Infrastructure.GraphQL.Mutations
@@ -13,37 +16,32 @@ namespace Infrastructure.GraphQL.Mutations
     [ExtendObjectType("Mutations")]
     public class ClientLogsMutations
     {
-        private readonly Context context;
-        private readonly Repository<ClientLog> repository;
-
         private readonly IMapper mapper;
 
-        public ClientLogsMutations([Service] Context context, IMapper mapper)
-        {
-            this.context = context;
-            repository = new Repository<ClientLog>(context);
-            this.mapper = mapper;
-        }
+        public ClientLogsMutations(IMapper mapper)
+            => this.mapper = mapper;
 
         [UseSorting]
         [UseFiltering]
         public async Task<ClientLog> CreateClientLog(ClientLogDTO payload,
-                                                    [Service] ITopicEventSender sender)
+                                                    [Service] ITopicEventSender sender,
+                                                    [Service] Logs logs)
         {
             var clientLog = mapper.Map<ClientLog>(payload);
-            await repository.CreateAsync(clientLog);
+            await logs.CreateAsync(clientLog);
             return clientLog;
         }
 
         [UseSorting]
         [UseFiltering]
         public async Task<ClientLog> UpdateClientLog(ClientLogDTO payload,
-                                                    [Service] ITopicEventSender sender)
+                                                    [Service] ITopicEventSender sender,
+                                                    [Service] Logs logs)
         {
             var clientLog = mapper.Map<ClientLog>(payload);
             try
             {
-                await repository.UpdateAsync(clientLog);
+                await logs.UpdateAsync(clientLog);
                 return clientLog;
             }
             catch (ArgumentOutOfRangeException)
@@ -58,12 +56,13 @@ namespace Infrastructure.GraphQL.Mutations
 
         [UseFiltering]
         public async Task<ClientLog> RemoveClientLog(ClientLogDTO payload,
-                                                    [Service] ITopicEventSender sender)
+                                                    [Service] ITopicEventSender sender,
+                                                    [Service] Logs logs)
         {
             var clientLog = mapper.Map<ClientLog>(payload);
             try
             {
-                await repository.DeleteAsync(clientLog.Id);
+                await logs.DeleteAsync(clientLog.Id);
                 return clientLog;
             }
             catch (ArgumentOutOfRangeException)

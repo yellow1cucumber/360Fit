@@ -1,7 +1,10 @@
 ﻿using Domain.Core;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.ClienLogging
 {
+    [DALRepository]
     public class ClientLog : Model
     {
         public string Message { get; set; }
