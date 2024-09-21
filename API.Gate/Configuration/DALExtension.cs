@@ -12,7 +12,7 @@ namespace API.Gate.Configuration
         {
             var assembly = Assembly.GetExecutingAssembly();
             var dbStoredModels = GetDbStoredTypes(assembly, typeof(DALRepository));
-            foreach ( var type in dbStoredModels)
+            foreach (var type in dbStoredModels)
             {
                 services.AddRepository(type);
             }
