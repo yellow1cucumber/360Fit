@@ -45,7 +45,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
-                                 opt => opt.MigrationsAssembly("API.Gate")), ServiceLifetime.Scoped);
+                                 opt => opt.MigrationsAssembly("API.Gate")));
 
 builder.Services.AddGQLService(options =>
 {
