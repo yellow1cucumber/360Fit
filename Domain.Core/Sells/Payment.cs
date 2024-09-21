@@ -2,8 +2,11 @@
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Users;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.Core.Sells
 {
+    [DALRepository]
     public class Payment : Model
     {       
         public User Provider { get; set; }
