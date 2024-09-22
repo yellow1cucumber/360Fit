@@ -78,16 +78,19 @@ services:
     tty: true
     stdin_open: true
 
-  oauth_service:
-    container_name: OAuth-service
+  360Auth:
+    container_name: 360Auth
     image: keycloak/keycloak:latest
     command: start
     environment:
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8080
       KC_HOSTNAME_STRICT_BACKCHANNEL: false
-      KC_HTTP_ENABLED: true
-      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HTTP_ENABLED: false
+      KC_HOSTNAME_STRICT_HTTPS: true
+      KS_HTTPS_PORT: 8443
+      KC_HTTPS_CERTIFICATE_FILE: /etc/x509/https/keycloak.crt
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/x509/https/keycloak.key
       KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
@@ -96,12 +99,13 @@ services:
       KC_DB_USERNAME: ${SERVICES_DB_USER}
       KC_DB_PASSWORD: ${SERVICES_DB_PASSWORD}
     ports:
-      - 8080:8080
+      - 8443:8443
     restart: always
     depends_on:
       - 360Services-db
     volumes:
       - keycloak_data:/opt/keycloak/data
+      - ./certs:/etc/x509/https
 
 volumes:
   360Services_data: null
