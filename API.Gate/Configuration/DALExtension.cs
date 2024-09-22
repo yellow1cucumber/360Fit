@@ -17,7 +17,6 @@ namespace API.Gate.Configuration
             foreach (var type in dbStoredModels)
             {
                 services.AddRepository(type);
-                Console.WriteLine(type.FullName);
             }
             return services;
         }
