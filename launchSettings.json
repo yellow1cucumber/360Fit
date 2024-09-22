@@ -8,7 +8,6 @@
       "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/graphql",
       "serviceActions": {
         "api.gate": "StartDebugging",
-        "client": "StartWithoutDebugging",
         "360Fit-db": "StartWithoutDebugging",
         "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
@@ -23,7 +22,6 @@
       "composeLaunchUrl": "http://localhost",
       "serviceActions": {
         "api.gate": "StartDebugging",
-        "client": "StartWithoutDebugging",
         "360Fit-db": "StartWithoutDebugging",
         "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
