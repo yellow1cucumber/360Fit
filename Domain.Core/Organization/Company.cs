@@ -4,8 +4,11 @@ using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
 using Domain.Core.Users;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.Core.Organization
 {
+    [DALRepository]
     public class Company : Model
     {
         public string PublicName { get; set; }

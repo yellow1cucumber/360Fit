@@ -1,5 +1,6 @@
 ﻿using Domain.ClienLogging;
 using Domain.Core.Organization;
+using Domain.Core.Organization.Contact;
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
@@ -42,6 +43,14 @@ namespace DAL
         public DbSet<Storage> Storages { get; set; }
         public DbSet<Nomenclature> Nomenclatures { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        #endregion
+
+        #region Organization
+        public DbSet<Contacts> Contacts { get; set; }
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+        public DbSet<BankRequisites> BankRequisites { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Requisites> Requisites { get; set; }
         #endregion
 
         #region ClientLogging

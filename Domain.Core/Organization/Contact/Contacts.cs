@@ -1,5 +1,8 @@
-﻿namespace Domain.Core.Organization.Contact
+﻿using SlnAssembly.Attributes;
+
+namespace Domain.Core.Organization.Contact
 {
+    [DALRepository]
     public class Contacts : Model
     {
         public IEnumerable<PhoneNumber> Phones { get; set; }
