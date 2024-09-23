@@ -11,6 +11,17 @@ services:
     volumes:
       - ./certs:/https/certs
 
+  client:
+    image: client
+    build:
+      context: ../frondent-f360fit
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./certs:/https/certs
+
   360Services-db:
     container_name: 360Services-postgres
     image: postgres:latest
@@ -78,16 +89,13 @@ services:
     tty: true
     stdin_open: true
 
-  360Auth:
+  oauth:
     container_name: 360Auth
     image: keycloak/keycloak:latest
     command: start
     environment:
       KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 8080
-      KC_HOSTNAME_STRICT_BACKCHANNEL: false
-      KC_HTTP_ENABLED: false
-      KC_HOSTNAME_STRICT_HTTPS: true
+      KC_HTTP_ENABLED: true
       KS_HTTPS_PORT: 8443
       KC_HTTPS_CERTIFICATE_FILE: /etc/x509/https/keycloak.crt
       KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/x509/https/keycloak.key
@@ -100,6 +108,7 @@ services:
       KC_DB_PASSWORD: ${SERVICES_DB_PASSWORD}
     ports:
       - 8443:8443
+      - 8080:8080
     restart: always
     depends_on:
       - 360Services-db

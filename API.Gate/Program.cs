@@ -34,7 +34,6 @@ builder.Services.AddAutoMapper(
     typeof(OrganizationProfile)
     );
 
-
 builder.Services.AddTransient<RedisConnection>();
 
 builder.Services.AddCors(options =>
@@ -49,7 +48,6 @@ builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
                                  opt => opt.MigrationsAssembly("API.Gate")));
 builder.Services.AddRepositories();
-
 
 builder.Services.AddGQLService(options =>
 {
@@ -68,7 +66,10 @@ builder.Services.AddGQLService(options =>
     };
 });
 
-builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+}
 #endregion
 
 
@@ -84,9 +85,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors("DEV_ALLOW_ALL");
 app.UseHttpsRedirection();
 app.UseWebSockets();
-app.UseAuthorization();
 app.MapControllers();
 app.MapGraphQL();
 #endregion
 
 app.Run();
+

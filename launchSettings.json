@@ -11,7 +11,7 @@
         "360Fit-db": "StartWithoutDebugging",
         "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "360Auth": "StartWithoutDebugging"
+        "oauth": "StartWithoutDebugging"
       }
     },
     "ClientApp": {
@@ -25,7 +25,7 @@
         "360Fit-db": "StartWithoutDebugging",
         "360Services-db": "StartWithoutDebugging",
         "redis": "StartWithoutDebugging",
-        "360Auth": "StartWithoutDebugging"
+        "oauth": "StartWithoutDebugging"
       }
     }
   }
