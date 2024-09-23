@@ -11,17 +11,6 @@ services:
     volumes:
       - ./certs:/https/certs
 
-  client:
-    image: client
-    build:
-      context: ../frondent-f360fit
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./certs:/https/certs
-
   360Services-db:
     container_name: 360Services-postgres
     image: postgres:latest
