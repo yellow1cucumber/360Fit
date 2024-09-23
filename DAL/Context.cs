@@ -1,9 +1,12 @@
 ﻿using Domain.ClienLogging;
+using Domain.Core.Organization;
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
 using Domain.Core.Users;
+using Domain.Core.Users.Roles;
+
 using Microsoft.EntityFrameworkCore;
 
 using ServiceCategory = Domain.Core.Sells.Category;
@@ -67,6 +70,12 @@ namespace DAL
                 .WithOne()
                 .HasForeignKey<UserCredentials>(u => u.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Role>()
+                .HasOne<Company>()
+                .WithMany()
+                .HasForeignKey(r => r.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

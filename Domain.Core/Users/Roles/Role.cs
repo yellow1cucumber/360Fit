@@ -1,11 +1,9 @@
-﻿using Domain.Core.Organization;
-
-namespace Domain.Core.Users.Roles
+﻿namespace Domain.Core.Users.Roles
 {
     public class Role : Model
     {
         public Type UserType { get; set; }
-        public Company Company { get; set; }
+        public int CompanyId { get; set; }
 
         public enum Type
         {
