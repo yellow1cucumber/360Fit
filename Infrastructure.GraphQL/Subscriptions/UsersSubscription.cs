@@ -22,14 +22,5 @@ namespace Infrastructure.GraphQL.Subscriptions
         public User OnUserRemoved([EventMessage] User user)
             => user;
         #endregion
-
-        #region UserCredentials
-        public UserCredentials OnUserCredentialsCreated([EventMessage] UserCredentials userCredentials)
-            => userCredentials;
-
-        [Subscribe]
-        public UserCredentials OnUserCredentialsChanged([EventMessage] UserCredentials userCredentials)
-            => userCredentials;
-        #endregion
     }
 }

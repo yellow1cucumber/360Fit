@@ -9,7 +9,6 @@ using Infrastructure.GraphQL.Attributes;
 
 #region TYPEDEF
 using Users = DAL.Repository<Domain.Core.Users.User>;
-using Credentials = DAL.Repository<Domain.Core.Users.UserCredentials>;
 #endregion
 
 namespace Infrastructure.GraphQL.Mutations
@@ -80,40 +79,5 @@ namespace Infrastructure.GraphQL.Mutations
             }
         }
         #endregion Users
-
-        #region UserCredentials
-        public async Task<UserCredentials> CreateUserCredentials(UserCredentialsDTO payload,
-                                                                [Service] ITopicEventSender sender,
-                                                                [Service] Credentials credentials)
-        {
-            var userCredentials = mapper.Map<UserCredentials>(payload);
-            await credentials.CreateAsync(userCredentials);
-            await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsCreated), userCredentials);
-            return userCredentials;
-        }
-
-        [UseProjection]
-        [UseFiltering]
-        public async Task<UserCredentials> UpdateUser(UserCredentialsDTO payload,
-                                                     [Service] ITopicEventSender sender,
-                                                     [Service] Credentials credentials)
-        {
-            var userCredentials = mapper.Map<UserCredentials>(payload);
-            try
-            {
-                await credentials.UpdateAsync(userCredentials);
-                await sender.SendAsync(nameof(UsersSubscription.OnUserCredentialsChanged), userCredentials);
-                return userCredentials;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new NotFound($"UserCredentials with id == {userCredentials.Id} not found", userCredentials.Id);
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        #endregion
     }
 }
