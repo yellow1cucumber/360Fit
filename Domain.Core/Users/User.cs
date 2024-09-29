@@ -16,6 +16,8 @@ namespace Domain.Core.Users
         public PhoneNumber PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
+        public DateOnly? LastVisit { get; set; }
+
         public Card? Card { get; set; }
         public double Deposit { get; set; }
 
