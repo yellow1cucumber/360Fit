@@ -35,20 +35,19 @@ namespace Infrastructure.GraphQL.Mutations
 
         [UseProjection]
         [UseFiltering]
-        public async Task<User> UpdateUser(UserDTO payload,
+        public async Task<User> UpdateUser(User payload,
                                           [Service] ITopicEventSender sender,
                                           [Service] Users users)
         {
-            var user = mapper.Map<User>(payload);
             try
             {
-                await users.UpdateAsync(user);
-                await sender.SendAsync(nameof(UsersSubscription.OnUserChanged), user);
-                return user;
+                await users.UpdateAsync(payload);
+                await sender.SendAsync(nameof(UsersSubscription.OnUserChanged), payload);
+                return payload;
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new NotFound($"User with id == {user.Id} not found", user.Id);
+                throw new NotFound($"User with id == {payload.Id} not found", payload.Id);
             }
             catch
             {
@@ -58,20 +57,19 @@ namespace Infrastructure.GraphQL.Mutations
 
 
         [UseFiltering]
-        public async Task<User> RemoveUser(UserDTO payload,
+        public async Task<User> RemoveUser(User payload,
                                           [Service] ITopicEventSender sender,
                                           [Service] Users users)
         {
-            var user = mapper.Map<User>(payload);
             try
             {
-                await users.DeleteAsync(user.Id);
-                await sender.SendAsync(nameof(UsersSubscription.OnUserRemoved), user);
-                return user;
+                await users.DeleteAsync(payload.Id);
+                await sender.SendAsync(nameof(UsersSubscription.OnUserRemoved), payload);
+                return payload;
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new NotFound($"User with id == {user.Id} not found", user.Id);
+                throw new NotFound($"User with id == {payload.Id} not found", payload.Id);
             }
             catch
             {
