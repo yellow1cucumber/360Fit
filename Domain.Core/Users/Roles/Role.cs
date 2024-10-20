@@ -2,6 +2,7 @@
 {
     public class Role : Model
     {
+        public int UserId { get; set; }
         public Type UserType { get; set; }
         public int CompanyId { get; set; }
 

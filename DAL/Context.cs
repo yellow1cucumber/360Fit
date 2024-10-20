@@ -67,11 +67,18 @@ namespace DAL
                 .HasForeignKey<Card>(uc => uc.Owner)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Roles)
+                .WithOne()
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Role>()
                 .HasOne<Company>()
                 .WithMany()
                 .HasForeignKey(r => r.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
     }
 }
