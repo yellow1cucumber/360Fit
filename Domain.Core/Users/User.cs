@@ -10,5 +10,7 @@ namespace Domain.Core.Users
         public string? Email { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
+
+        public int CompanyId { get; set; }
     }
 }

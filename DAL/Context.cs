@@ -61,13 +61,17 @@ namespace DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasOne<Company>()
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Client>()
                 .HasOne(u => u.Card)
                 .WithOne()
                 .HasForeignKey<Card>(uc => uc.Owner)
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
-
     }
 }

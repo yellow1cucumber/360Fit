@@ -13,12 +13,12 @@ namespace Infrastructure.GraphQL.Queries
         [UseFiltering]
         [UseSorting]
         public IQueryable<Staff> ReadStaff(Context context, int companyId)
-            => context.Staff.AsQueryable();
+            => context.Staff.Where(x => x.CompanyId == companyId).AsQueryable();
 
         [UseProjection]
         [UseFiltering]
         [UseSorting]
         public IQueryable<Client> ReadClients(Context context, int companyId)
-            => context.Clients.AsQueryable();
+            => context.Clients.Where(x => x.CompanyId == companyId).AsQueryable();
     }
 }
