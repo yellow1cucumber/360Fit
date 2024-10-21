@@ -6,7 +6,6 @@ using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
 using Domain.Core.Users;
-using Domain.Core.Users.Roles;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +19,8 @@ namespace DAL
             : base(options) {}
 
         #region Users
-        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Staff> Staff { get; set; }
         #endregion
 
         #region Service
@@ -61,23 +61,12 @@ namespace DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Client>()
                 .HasOne(u => u.Card)
                 .WithOne()
                 .HasForeignKey<Card>(uc => uc.Owner)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Roles)
-                .WithOne()
-                .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Role>()
-                .HasOne<Company>()
-                .WithMany()
-                .HasForeignKey(r => r.CompanyId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

@@ -1,8 +1,11 @@
 ﻿using Domain.Core.Organization.Contact;
 
-namespace Infrastructure.DTO.Users
+using SlnAssembly.Attributes;
+
+namespace Domain.Core.Users
 {
-    public class UserDTO
+    [DALRepository]
+    public class Staff : User
     {
         public string Name { get; set; }
         public string Surname { get; set; }

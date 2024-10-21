@@ -12,7 +12,13 @@ namespace Infrastructure.GraphQL.Queries
         [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<User> ReadUsers(Context context)
-            => context.Users.AsQueryable();
+        public IQueryable<Staff> ReadStaff(Context context, int companyId)
+            => context.Staff.AsQueryable();
+
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public IQueryable<Client> ReadClients(Context context, int companyId)
+            => context.Clients.AsQueryable();
     }
 }

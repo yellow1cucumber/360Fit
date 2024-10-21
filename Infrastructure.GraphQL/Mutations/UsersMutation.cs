@@ -9,6 +9,8 @@ using Infrastructure.GraphQL.Attributes;
 
 #region TYPEDEF
 using Users = DAL.Repository<Domain.Core.Users.User>;
+using Staffs = DAL.Repository<Domain.Core.Users.Staff>;
+using Clients = DAL.Repository<Domain.Core.Users.Client>;
 #endregion
 
 namespace Infrastructure.GraphQL.Mutations
@@ -77,5 +79,117 @@ namespace Infrastructure.GraphQL.Mutations
             }
         }
         #endregion Users
+
+        #region Staff
+        public async Task<Staff> CreateStaffUser(StaffDTO payload,
+                                            [Service] ITopicEventSender sender,
+                                            [Service] Staffs staff)
+        {
+            var staffUser = mapper.Map<Staff>(payload);
+            await staff.CreateAsync(staffUser);
+            await sender.SendAsync(nameof(UsersSubscription.OnStaffUserCreated), staff);
+            return staffUser;
+        }
+
+        [UseProjection]
+        [UseFiltering]
+        public async Task<Staff> UpdateStaffUser(Staff payload,
+                                            [Service] ITopicEventSender sender,
+                                            [Service] Staffs staff)
+        {
+            try
+            {
+                await staff.UpdateAsync(payload);
+                await sender.SendAsync(nameof(UsersSubscription.OnStaffUserUpdated), payload);
+                return payload;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NotFound($"Staff user with id == {payload.Id} not found", payload.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        [UseFiltering]
+        public async Task<Staff> RemoveStaffUser(Staff payload,
+                                                [Service] ITopicEventSender sender,
+                                                [Service] Staffs staff)
+        {
+            try
+            {
+                await staff.DeleteAsync(payload.Id);
+                await sender.SendAsync(nameof(UsersSubscription.OnStaffUserRemoved), payload);
+                return payload;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NotFound($"Staff with id == {payload.Id} not found", payload.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Client
+        public async Task<Client> CreateClient(ClientDTO payload,
+                                              [Service] ITopicEventSender sender,
+                                              [Service] Clients clients)
+        {
+            var client = mapper.Map<Client>(payload);
+            await clients.CreateAsync(client);
+            await sender.SendAsync(nameof(UsersSubscription.OnClientCreated), client);
+            return client;
+        }
+
+        [UseProjection]
+        [UseFiltering]
+        public async Task<Client> UpdateClient(Client payload,
+                                              [Service] ITopicEventSender sender,
+                                              [Service] Clients clients)
+        {
+            try
+            {
+                await clients.UpdateAsync(payload);
+                await sender.SendAsync(nameof(UsersSubscription.OnClientUpdated), payload);
+                return payload;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NotFound($"Client with id == {payload.Id} not found", payload.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        [UseFiltering]
+        public async Task<Client> RemoveClient(Client payload,
+                                              [Service] ITopicEventSender sender,
+                                              [Service] Clients clients)
+        {
+            try
+            {
+                await clients.DeleteAsync(payload.Id);
+                await sender.SendAsync(nameof(UsersSubscription.OnStaffUserRemoved), payload);
+                return payload;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NotFound($"Client with id == {payload.Id} not found", payload.Id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }

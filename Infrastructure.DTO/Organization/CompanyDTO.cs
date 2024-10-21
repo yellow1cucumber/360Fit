@@ -3,7 +3,9 @@ using Infrastructure.DTO.Sells;
 using Infrastructure.DTO.Sells.Products;
 using Infrastructure.DTO.Sells.Service;
 using Infrastructure.DTO.Users;
+
 using Domain.Core.Organization;
+using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Organization
 {
@@ -17,7 +19,7 @@ namespace Infrastructure.DTO.Organization
         public RequisitesDTO Requisites { get; set; }
         public ContactsDTO Contacts { get; set; }
 
-        public IEnumerable<UserDTO> Staff { get; set; }
+        public IEnumerable<StaffDTO> Staff { get; set; }
         public IEnumerable<UserDTO> Clients { get; set; }
 
         public IEnumerable<CashRegisterDTO> CashRegisters { get; set; }

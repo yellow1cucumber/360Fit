@@ -11,7 +11,7 @@ namespace Infrastructure.DTO.Organization
         public string NameRU { get; set; }
         public string? NameEN { get; set; }
 
-        public UserDTO? Director { get; set; }
+        public StaffDTO? Director { get; set; }
 
         public string? BIN { get; set; }
         public string? KBE { get; set; }
