@@ -1,4 +1,4 @@
-﻿using Domain.Core.Organization.Contact;
+﻿using Infrastructure.DTO.Organization.Contact;
 
 namespace Infrastructure.DTO.Users
 {
@@ -8,7 +8,7 @@ namespace Infrastructure.DTO.Users
         public string Surname { get; set; }
         public string? Patronomic { get; set; }
         public string? Email { get; set; }
-        public PhoneNumber PhoneNumber { get; set; }
+        public PhoneNumberDTO PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
         public int CompanyId { get; set; }

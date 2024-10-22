@@ -19,16 +19,16 @@ namespace Domain.Core.Organization
         public Requisites Requisites { get; set; }
         public Contacts Contacts { get; set; }
 
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; } = Enumerable.Empty<User>();
 
-        public IEnumerable<CashRegister> CashRegisters { get; set; }
-        public IEnumerable<Storage> Storages { get; set; }
-        public IEnumerable<Nomenclature> Nomenclatures { get; set; }
-        public IEnumerable<Supplier> Suppliers { get; set; }
+        public IEnumerable<CashRegister> CashRegisters { get; set; } = Enumerable.Empty<CashRegister>();
+        public IEnumerable<Storage> Storages { get; set; } = Enumerable.Empty<Storage>();
+        public IEnumerable<Nomenclature> Nomenclatures { get; set; } = Enumerable.Empty<Nomenclature>();
+        public IEnumerable<Supplier> Suppliers { get; set; } = Enumerable.Empty<Supplier>();
 
-        public IEnumerable<Service> Services { get; set; }
+        public IEnumerable<Service> Services { get; set; } = Enumerable.Empty<Service>();
 
-        public IEnumerable<Payment> Payment { get; set; }
+        public IEnumerable<Payment> Payment { get; set; } = Enumerable.Empty<Payment>();
 
 
         public enum CompanyCategory

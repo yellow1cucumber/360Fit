@@ -82,8 +82,8 @@ namespace Infrastructure.GraphQL.Mutations
 
         #region Staff
         public async Task<Staff> CreateStaffUser(StaffDTO payload,
-                                            [Service] ITopicEventSender sender,
-                                            [Service] Staffs staff)
+                                                [Service] ITopicEventSender sender,
+                                                [Service] Staffs staff)
         {
             var staffUser = mapper.Map<Staff>(payload);
             await staff.CreateAsync(staffUser);
@@ -94,8 +94,8 @@ namespace Infrastructure.GraphQL.Mutations
         [UseProjection]
         [UseFiltering]
         public async Task<Staff> UpdateStaffUser(Staff payload,
-                                            [Service] ITopicEventSender sender,
-                                            [Service] Staffs staff)
+                                                [Service] ITopicEventSender sender,
+                                                [Service] Staffs staff)
         {
             try
             {
