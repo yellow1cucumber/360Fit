@@ -5,7 +5,6 @@ using Infrastructure.DTO.Sells.Service;
 using Infrastructure.DTO.Users;
 
 using Domain.Core.Organization;
-using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Organization
 {
