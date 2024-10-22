@@ -6,7 +6,7 @@ namespace Infrastructure.DTO.Users
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string? Patronomic { get; set; }
+        public string? Patronymic { get; set; }
         public string? Email { get; set; }
         public PhoneNumberDTO PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
