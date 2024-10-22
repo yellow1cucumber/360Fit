@@ -1,28 +1,35 @@
 ﻿using AutoMapper;
-using Domain.Core.Users;
 using HotChocolate.Subscriptions;
+
+using Domain.Core.Users;
+using Domain.Cards;
+
 using Infrastructure.DTO.Users;
 
 using Infrastructure.GraphQL.Subscriptions;
 using Infrastructure.GraphQL.Exceptions;
 using Infrastructure.GraphQL.Attributes;
 
+
+
 #region TYPEDEF
 using Users = DAL.Repository<Domain.Core.Users.User>;
 using Staffs = DAL.Repository<Domain.Core.Users.Staff>;
 using Clients = DAL.Repository<Domain.Core.Users.Client>;
+using Infrastructure.DTO.Sells.Service;
+using Domain.Barcode.Generators;
+using Domain.Core.Sells.Service;
 #endregion
 
 namespace Infrastructure.GraphQL.Mutations
 {
     [GQLMutation]
     [ExtendObjectType("Mutations")]
-    public class UsersMutation
+    public class UsersMutation(IMapper mapper, 
+                               ICardService cardService)
     {
-        private readonly IMapper mapper;
-
-        public UsersMutation(IMapper mapper)
-            => this.mapper = mapper;
+        private readonly IMapper mapper = mapper;
+        private readonly ICardService cardService = cardService;
 
         #region Users
         public async Task<User> CreateUser(UserDTO payload,
@@ -141,8 +148,17 @@ namespace Infrastructure.GraphQL.Mutations
                                               [Service] ITopicEventSender sender,
                                               [Service] Clients clients)
         {
-            var client = mapper.Map<Client>(payload);
+            var client = this.mapper.Map<Client>(payload);
+
             await clients.CreateAsync(client);
+
+            var cardDto = this.GenerateCard(client);
+            var card = this.mapper.Map<Card>(cardDto);
+
+            client.Card = card;
+
+            await clients.UpdateAsync(client);
+
             await sender.SendAsync(nameof(UsersSubscription.OnClientCreated), client);
             return client;
         }
@@ -189,6 +205,15 @@ namespace Infrastructure.GraphQL.Mutations
             {
                 throw;
             }
+        }
+        #endregion
+
+        #region UTILS
+        private CardDTO GenerateCard(Client client)
+        {
+            IBarcodeGenerator generator = new HashBarcodeGenerator<Client>(client, 3);
+            CardDTO card = this.cardService.GenerateCard(client.Id, generator);
+            return card;
         }
         #endregion
     }

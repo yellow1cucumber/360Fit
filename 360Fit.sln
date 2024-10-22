@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.ClientLogging", "Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.GraphQL", "Infrastructure.GraphQL\Infrastructure.GraphQL.csproj", "{A11D2C62-19E8-4B2A-A1A2-194D7B039588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnAssembly.Attributes", "Assembly.Attributes\SlnAssembly.Attributes.csproj", "{368CE95A-3E79-4D0B-A2D3-53804E2D60C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlnAssembly.Attributes", "Assembly.Attributes\SlnAssembly.Attributes.csproj", "{368CE95A-3E79-4D0B-A2D3-53804E2D60C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Barcode", "Domain.Cards\Domain.Barcode.csproj", "{536A974E-2C5D-424A-953B-DED2F43A03DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,12 @@ Global
 		{368CE95A-3E79-4D0B-A2D3-53804E2D60C3}.NoVariablesDefault|Any CPU.Build.0 = Debug|Any CPU
 		{368CE95A-3E79-4D0B-A2D3-53804E2D60C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{368CE95A-3E79-4D0B-A2D3-53804E2D60C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.NoVariablesDefault|Any CPU.ActiveCfg = Debug|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.NoVariablesDefault|Any CPU.Build.0 = Debug|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536A974E-2C5D-424A-953B-DED2F43A03DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

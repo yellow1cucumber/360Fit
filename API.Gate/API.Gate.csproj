@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Domain.Cards\Domain.Barcode.csproj" />
     <ProjectReference Include="..\Domain.ClientLogging\Domain.ClientLogging.csproj" />
     <ProjectReference Include="..\Infrastructure.DTO\Infrastructure.DTO.csproj" />
     <ProjectReference Include="..\Infrastructure.GraphQL\Infrastructure.GraphQL.csproj" />
