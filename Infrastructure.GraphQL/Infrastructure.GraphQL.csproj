@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Domain.Cards\Domain.Barcode.csproj" />
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj" />
     <ProjectReference Include="..\Infrastructure.DTO\Infrastructure.DTO.csproj" />
   </ItemGroup>

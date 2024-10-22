@@ -7,6 +7,8 @@ using System.Net;
 using Infrastructure.GraphQL;
 using Infrastructure.GraphQL.Redis;
 using API.Gate.Configuration;
+using Domain.Cards;
+using Domain.Barcode;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +37,7 @@ builder.Services.AddAutoMapper(
     );
 
 builder.Services.AddTransient<RedisConnection>();
+builder.Services.AddTransient<ICardService, CardService>();
 
 builder.Services.AddCors(options =>
     options.AddPolicy("DEV_ALLOW_ALL", 

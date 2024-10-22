@@ -8,13 +8,13 @@ namespace Domain.Barcode
 {
     public class CardService : ICardService
     {
-        public CardDTO GenerateCard(UserDTO owner, 
+        public CardDTO GenerateCard(int ownerId, 
                                     IBarcodeGenerator generator)
         {
             var barcode = generator.GenerateBarcode();
             return new CardDTO
             {
-                Owner = owner,
+                Owner = ownerId,
                 Barcode = barcode,
                 ConnectedServices = []
             };
