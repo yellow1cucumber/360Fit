@@ -1,5 +1,8 @@
-﻿namespace Domain.Core.Sells
+﻿using SlnAssembly.Attributes;
+
+namespace Domain.Core.Sells
 {
+    [DALRepository]
     public class Category : Model
     {        
         public string Name { get; set; }

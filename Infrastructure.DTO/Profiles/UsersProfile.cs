@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+
 using Domain.Core.Users;
+
 using Infrastructure.DTO.Users;
 
 namespace Infrastructure.DTO.Profiles
@@ -9,7 +11,8 @@ namespace Infrastructure.DTO.Profiles
         public UsersProfile()
         {
             this.CreateMap<User, UserDTO>().ReverseMap();
-            this.CreateMap<UserCredentials, UserCredentialsDTO>().ReverseMap();
+            this.CreateMap<Client, ClientDTO>().ReverseMap();
+            this.CreateMap<Staff, StaffDTO>().ReverseMap();
         }
     }
 }

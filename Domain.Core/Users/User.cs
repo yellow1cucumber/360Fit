@@ -1,4 +1,4 @@
-﻿using Domain.Core.Users.Roles;
+﻿using Domain.Core.Organization.Contact;
 
 namespace Domain.Core.Users
 {
@@ -6,11 +6,11 @@ namespace Domain.Core.Users
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Patronomic { get; set; }
+        public string? Patronymic { get; set; }
         public string? Email { get; set; }
+        public PhoneNumber PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
-        public UserCredentials Credentials { get; set; }
-        public IEnumerable<Role> Roles { get; set; }
+        public int CompanyId { get; set; }
     }
 }

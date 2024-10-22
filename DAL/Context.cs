@@ -1,9 +1,12 @@
 ﻿using Domain.ClienLogging;
+using Domain.Core.Organization;
+using Domain.Core.Organization.Contact;
 using Domain.Core.Sells;
 using Domain.Core.Sells.PaymentRules;
 using Domain.Core.Sells.Products;
 using Domain.Core.Sells.Service;
 using Domain.Core.Users;
+
 using Microsoft.EntityFrameworkCore;
 
 using ServiceCategory = Domain.Core.Sells.Category;
@@ -16,7 +19,8 @@ namespace DAL
             : base(options) {}
 
         #region Users
-        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Staff> Staff { get; set; }
         #endregion
 
         #region Service
@@ -40,6 +44,14 @@ namespace DAL
         public DbSet<Supplier> Suppliers { get; set; }
         #endregion
 
+        #region Organization
+        public DbSet<Contacts> Contacts { get; set; }
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+        public DbSet<BankRequisites> BankRequisites { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Requisites> Requisites { get; set; }
+        #endregion
+
         #region ClientLogging
         public DbSet<ClientLog> ClientLogs { get; set; }
         #endregion
@@ -50,9 +62,15 @@ namespace DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>()
-                .HasOne(u => u.Credentials)
+                .HasOne<Company>()
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Client>()
+                .HasOne(u => u.Card)
                 .WithOne()
-                .HasForeignKey<UserCredentials>(uc => uc.UserId)
+                .HasForeignKey<Card>(uc => uc.Owner)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

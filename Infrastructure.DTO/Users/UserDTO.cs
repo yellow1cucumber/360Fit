@@ -1,4 +1,4 @@
-﻿using Domain.Core.Users.Roles;
+﻿using Infrastructure.DTO.Organization.Contact;
 
 namespace Infrastructure.DTO.Users
 {
@@ -6,11 +6,11 @@ namespace Infrastructure.DTO.Users
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Patronomic { get; set; }
+        public string? Patronymic { get; set; }
         public string? Email { get; set; }
+        public PhoneNumberDTO PhoneNumber { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
-        public UserCredentialsDTO Credentials { get; set; }
-        public IEnumerable<Role> Roles { get; set; }
+        public int CompanyId { get; set; }
     }
 }

@@ -1,14 +1,30 @@
-using API.Gate.GraphQl;
-using API.Gate.GraphQl.Exceptions;
-using API.Gate.GraphQl.Mutations;
-using API.Gate.GraphQl.Redis;
-using API.Gate.GraphQl.Subscriptions;
 using DAL;
 using Infrastructure.DTO.Profiles;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
+using Keycloak.AuthServices.Authentication;
+using System.Net;
+using Infrastructure.GraphQL;
+using Infrastructure.GraphQL.Redis;
+using API.Gate.Configuration;
+using Domain.Cards;
+using Domain.Barcode;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+#region HTTPS
+builder.WebHost.UseSetting("DOTNET_USE_DEV_CERTIFICATE", "false");
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 7070);
+    options.Listen(IPAddress.Any, 7071, listenOptions =>
+    {
+        listenOptions.UseHttps("/https/certs/360Fit-API-pfx-dev.pfx", "Tiberium13");
+    });
+});
+#endregion
+
 
 #region Services
 builder.Services.AddControllers();
@@ -20,11 +36,12 @@ builder.Services.AddAutoMapper(
     typeof(OrganizationProfile)
     );
 
-
 builder.Services.AddTransient<RedisConnection>();
+builder.Services.AddTransient<ICardService, CardService>();
 
 builder.Services.AddCors(options =>
-    options.AddDefaultPolicy(builder => builder
+    options.AddPolicy("DEV_ALLOW_ALL", 
+        builder => builder
         .AllowAnyHeader()
         .AllowAnyOrigin()
         .AllowAnyMethod())
@@ -33,37 +50,29 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"),
                                  opt => opt.MigrationsAssembly("API.Gate")));
+builder.Services.AddRepositories();
 
-builder.Services.AddGraphQLServer()
-                .RegisterDbContext<Context>()
-                .AddProjections()
-                .AddFiltering()
-                .AddSorting()
-                .AddErrorFilter<ErrorFilter>()
+builder.Services.AddGQLService(options =>
+{
+    options.ConfigureSubscriptions = (sp, gqlBuilder) =>
+    {
+        gqlBuilder.AddRedisSubscriptions(_ =>
+        {
+            var con = new RedisConnection(builder.Configuration);
+            var opt = con.GetConfigurationOptions();
+            return ConnectionMultiplexer.Connect(opt);
+        });
+    };
+    options.ConfigureDbContext = (sp, gqlBuilder) =>
+    {
+        gqlBuilder.RegisterDbContext<Context>();
+    };
+});
 
-                .AddQueryType(q => q.Name("Query"))
-                    .AddType<UsersQuery>()
-                    .AddType<SellsQuery>()
-                    .AddType<ServicesQuery>()
-                    .AddType<ProductsQuery>()
-
-                .AddMutationType(m => m.Name("Mutations"))
-                    .AddType<UsersMutation>()
-                    .AddType<ProductsMutations>()
-                    .AddType<SellsMutation>()
-                    .AddType<ServiceMutations>()
-
-                .AddRedisSubscriptions( (sp) =>
-                {
-                    var con = new RedisConnection(builder.Configuration);
-                    var opt = con.GetConfigurationOptions();
-                    return ConnectionMultiplexer.Connect(opt);
-                })
-                .AddSubscriptionType(s => s.Name("Subscriptions"))
-                    .AddType<ProductsSubscription>()
-                    .AddType<SellsSubscription>()
-                    .AddType<ServiceSubscription>()
-                    .AddType<UsersSubscription>();
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+}
 #endregion
 
 
@@ -76,11 +85,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("DEV_ALLOW_ALL");
 app.UseHttpsRedirection();
 app.UseWebSockets();
-app.UseAuthorization();
 app.MapControllers();
 app.MapGraphQL();
 #endregion
 
 app.Run();
+

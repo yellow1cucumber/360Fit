@@ -1,7 +1,10 @@
 ﻿using Domain.Core.Users;
 
+using SlnAssembly.Attributes;
+
 namespace Domain.Core.Organization
 {
+    [DALRepository]
     public class Requisites : Model
     {
         public OrganizationTypes OrganizationType { get; set; }
